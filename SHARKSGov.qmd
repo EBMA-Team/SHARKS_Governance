@@ -27,8 +27,7 @@ execute:
 
 # Introduction
 
-The following analysis is a report on the activity, quality and data contained in the SHARKS registry [wiki]
-
+The following analysis is a report on the activity, quality and data contained in the SHARKS registry \[wiki\]
 
 ## Preparation
 
@@ -77,6 +76,7 @@ pacman::p_load(# Load required packages
   
   
 ```
+
 ## Authorisations
 
 Access to SHARKS datasets was pre-authorised using the *gargle* package and *googledrive*.
@@ -378,7 +378,6 @@ colnames(PISCF) <- PISCF_Col
 
 ```
 
-
 ```{r}
 
 
@@ -392,10 +391,6 @@ CAFTable <- googlesheets4::range_read(
 
 
 ```
-
-
-
-
 
 A static registry snapshot was retrieved using the pre-specified function (see *Functions for Processing)* and formatted using *openxlsx* based on the fixed date of preparation of the snapshot (30-Jun-2024) and using *tidyverse* syntax and associated packages (*dplyr, lubridate*). Date columns were prepared for further analysis using *lubridate*.
 
@@ -446,12 +441,7 @@ STROBEInput <- openxlsx2::wb_to_df(
 
 ```
 
-
-
 # Recreate looker plots
-
-
-
 
 ```{r}
 #| label: baseline-vr12
@@ -465,7 +455,6 @@ FigureVR12PCS <- Snapshot |> dplyr::filter(RegistryCohortName != "KneeDeformity"
 knitr::knit_print(FigureVR12PCS)
 
 ```
-
 
 # Missingness and Compliance
 
@@ -486,13 +475,7 @@ naniar::gg_miss_var(
 
 ```
 
-
-
-
-
-
 # STROBE by Region
-
 
 ```{r}
 
@@ -518,7 +501,6 @@ STROBEFlow2 <- STROBEInput |>
   )
 
 ```
-
 
 ```{r}
 
@@ -558,7 +540,6 @@ STROBEFlow3 <- STROBEFlow2 |> dplyr::mutate(
 )
 
 ```
-
 
 ```{r}
 #| label: fig-strobe
@@ -695,7 +676,6 @@ PROMKA <- SnapshotKA |> dplyr::select(
 
 ```
 
-
 ```{r}
 
 naniar::gg_miss_var(
@@ -774,8 +754,6 @@ SnapshotGen <- Snapshot |> filter(
 )
 ```
 
-
-
 ```{r}
 
 FigureSMCQ <- SnapshotGen |> dplyr::filter(
@@ -800,8 +778,6 @@ knitr::knit_print(FigureEQ5D)
 
 ```
 
-
-
 ```{r}
 
 FigureVR12_2 <- SnapshotGen |> dplyr::filter(
@@ -814,8 +790,6 @@ knitr::knit_print(FigureVR12_2)
 
 ```
 
-
-
 ```{r}
 
 FigureSANE <- SnapshotGen |> dplyr::filter(
@@ -827,8 +801,6 @@ FigureSANE <- SnapshotGen |> dplyr::filter(
 knitr::knit_print(FigureSANE)
 
 ```
-
-
 
 ## Tibiofemoral Instability
 
@@ -861,7 +833,6 @@ PROMTFI <- SnapshotTFI |> dplyr::select(
 
 #MasterPROMWORC <- MasterPROM |> filter(TimePoint != "3months")
 ```
-
 
 ```{r}
 
@@ -922,33 +893,40 @@ AdditionDate
 PreReg |> dplyr::select(
   FormID,
   Status
+) |> distinct(
+  FormID,
+  .keep_all = TRUE
 ) |> dplyr::rename(
   PreRegStatus1 = "Status"
-) |> dplyr::filter(
-  stringr::str_detect(PreRegStatus1,"Duplicate", negate = TRUE)
 ),
 by = "FormID"
 ) |> dplyr::left_join(
 PISCF |> dplyr::select(
   FormID,
   RegistryStatus
+) |> distinct(
+  FormID,
+.keep_all = TRUE
 ) |> dplyr::rename(
   PISCFStatus1 = "RegistryStatus"
-) |> dplyr::filter(
-  stringr::str_detect(PISCFStatus1,"Duplicate", negate = TRUE)
 ),
 by = "FormID"
 ) |> dplyr::left_join(
 CAFTable |> dplyr::select(
   TreatmentID,
-  ProcessStatus
+  ProcessStatus,
+  TimepointCAF
 ) |> dplyr::rename(
   CAFStatus1 = "ProcessStatus"
 ) |> dplyr::filter(
-  stringr::str_detect(CAFStatus1,"Duplicate", negate = TRUE)
+  TimepointCAF == "Pre_Treatment",
+  stringr::str_detect(CAFStatus1,"duplicate", negate = TRUE)
+) |> dplyr::select(
+  -TimepointCAF
 ),
 by = "TreatmentID"
-) 
+)
 
 ```
 
+Unique values for the invites; repeat CAFs for the same patient (different dates) and then multiple PISCF attempts (
