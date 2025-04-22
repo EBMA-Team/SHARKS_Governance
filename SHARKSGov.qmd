@@ -920,7 +920,7 @@ CAFTable |> dplyr::select(
   CAFStatus1 = "ProcessStatus"
 ) |> dplyr::filter(
   TimepointCAF == "Pre_Treatment",
-  stringr::str_detect(CAFStatus1,"duplicate", negate = TRUE)
+  stringr::str_detect(CAFStatus1,"Duplicate", negate = TRUE)
 ) |> dplyr::select(
   -TimepointCAF
 ),
