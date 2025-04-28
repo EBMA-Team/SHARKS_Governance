@@ -20,7 +20,7 @@ format:
     code-fold: true
     
 execute: 
-  echo: true
+  echo: false
   warning: false
   message: false
 ---
@@ -155,6 +155,8 @@ DbSS = "https://docs.google.com/spreadsheets/d/1JPXxLYIlQDzMLCw5mwYKW9al78n7jCCd
 PreRegScreen = "https://docs.google.com/spreadsheets/d/1sS2cRYkVaoXzE5Lnm5gn78d5en4cX35B-kLXHaok-J8/edit",
 PICSFResp = "https://docs.google.com/spreadsheets/d/1HOhXbZtyVLxt_CBv91b3lr9WWbQvPFcL0VYM0m-wuNI/edit",
 ClinicAssess = "https://docs.google.com/spreadsheets/d/1RtsPLxxz4dWqp9LEz7z_5cusxZ9r2EnlnwhATM3rv7Y/edit",
+AdminForm = "https://docs.google.com/spreadsheets/d/12TeTNGMfu0Z_ebFu4TxOpyJbGWCG9UsIM_SaEma95F0/edit",
+ACAF = "https://docs.google.com/spreadsheets/d/1g2vlbICJwKE-vyABhxeTk2jZjr_lKc9qe0DnIPbWJ04/edit",
 ConsultList = "https://docs.google.com/spreadsheets/d/1eKz-qgNoDNhw-Zyf44wH8wU32Q7BMgkF7zBQ8aPYP-c/edit"
 )
 
@@ -376,9 +378,22 @@ PISCF_Col <- c(
 
 colnames(PISCF) <- PISCF_Col
 
-```
+ConsultCount <- googlesheets4::range_read(
+  ss = SheetIDs$ConsultList,
+  sheet = "CountLogs", 
+  range = "A5:R", #Drop test entries
+  col_names = FALSE, 
+  col_types = "Dnnnnnnnnnnnnnnnnn"
+  )
 
-```{r}
+
+Consult_Col <- googlesheets4::range_read(
+  ss = SheetIDs$ConsultList,
+  sheet = "CountLogs", 
+  range = "A1:AN1"
+  )
+
+colnames(ConsultCount) <- colnames(Consult_Col)
 
 
 CAFTable <- googlesheets4::range_read(
@@ -387,6 +402,26 @@ CAFTable <- googlesheets4::range_read(
   range = "A2:BH",
   col_names = TRUE, 
   col_types = "ccccliiciccccccccccccccccccccnnnnnnnnnnnncccciinnnnccccccccc"
+  )
+
+```
+
+```{r}
+
+AdminTable <- googlesheets4::range_read(
+  ss = SheetIDs$AdminForm,
+  sheet = "SHARKS - Admin_RawData", 
+  range = "A3:AK",
+  col_names = TRUE, 
+  col_types = "cccTlnicccccccccccccccccccccccccccccT"
+  )
+
+ACAF <- googlesheets4::range_read(
+  ss = SheetIDs$ACAF,
+  sheet = "SHARKS - Admin Clinic Assessment Form_RawData", 
+  range = "A3:BQ",
+  col_names = TRUE, 
+  col_types = "cccTlnicccccccccccccccccccccccccccccccnnnnnnnnncciicciiiiiicccccccccc"
   )
 
 
@@ -441,38 +476,238 @@ STROBEInput <- openxlsx2::wb_to_df(
 
 ```
 
-# Recreate looker plots
+# Context
+
+Engagement to design and implement a department registry at QEII Hospital commenced in 2016 as a private-public partnership between the Department and EBM Analytics. The registry launched as a single-surgeon pilot in July 2017 within the Department of Orthopaedics, with Chris Bell as the Principal Investigator. At commencement, a series of shoulder and knee cohorts were designed and implemented that reflected the practice of the project PI. In brief, the recruitment and data collection processes were based largely on paper (initial consent and questionnaire pack) and followup scores completed by paper or, in a minority of cases, electronic capture through web-based forms.
+
+In June 2019 the registry was expanded to the current cohort structure, with a *hip arthroplasty* and additional knee cohort added (*Knee Deformity)*, as well as contributions from other consultants in the Department (N = 4 in total). At this time, Lorenzo Calabro took over operational direction of the Department research activities and the newly renamed SHARKS (Shoulder, Hip Arthroplasty and Knee Surgery) Registry. A [wiki](https://sites.google.com/ebma.com.au/sharksregistry/home) was commissioned (referred to from here as Version 1) to document the registry and associated activities. At around this time, a paper was published describing the initial implementation and quality results.
+
+::: border
+Lee, B., Ebrahimi, M., Ektas, N., Ting, C. H., Cowley, M., Scholes, C., & Bell, C. (2020). Implementation and quality assessment of a clinical orthopaedic registry in a public hospital department. BMC Health Services Research, 20(1), 393.
+:::
+
+Restrictions on theatre lists and in-person clinics began from \~April 2020 with the declaration of a state public health emergency in January 2020 due to the COVID-19 pandemic, with rolling lockdowns and restrictions continuing into 2023. Throughout this period, followup analyses of registry data was conducted, with efforts to recruit new patients and followup scores by phone. Planning for the second iteration (Version 2) of the Registry commenced in 2021, with a major amendment to the HREC approvals submitted October 2021.
+
+Version 2 of the SHARKS registry moved all recruitment and data collection processes to an electronic platform, including opt-in patient consent. It also included coverage for all eligible cases within the Department and lifted restrictions for recruitment and monitoring. Patient communication was consolidated to sms and a website interface provided for staff data collection in clinics and theatres. Approval for final implementation of the system, and the ongoing support contract was provided in May 2024, with initial rollout in August 2024 and full rollout to all Department activities in October 2024. A [wiki for Version 2](https://sites.google.com/ebma.com.au/sharksv2-registry-wiki/home) of the Registry was also commissioned in 2024.
+
+# Engagement
+
+The current iteration of the SHARKS registry commenced in August 2024.
 
 ```{r}
-#| label: baseline-vr12
-#| fig-cap: "Summary of VR12-PCS at baseline by cohort"
 
-FigureVR12PCS <- Snapshot |> dplyr::filter(RegistryCohortName != "KneeDeformity") |>
-  ggplot(aes(y = RegistryCohortName, x = VR12PCS_Preop)) +
-  stat_halfeye()
-
-
-knitr::knit_print(FigureVR12PCS)
+CurrSTROBE <- Invite |> dplyr::select(
+Timestamp,
+Timepoint,
+FormID,
+AppointmentDate,
+URN,
+DateofBirth,
+Sex,
+ApptType,
+Resource,
+AdditionDate
+) |> distinct(
+  URN,
+  .keep_all = TRUE
+) |> dplyr::mutate(
+  TreatmentID = stringr::str_replace(FormID, "\\.[^\\.]*$", "")
+  ) |> dplyr::left_join(
+PreReg |> dplyr::select(
+  FormID,
+  Status
+) |> distinct(
+  FormID,
+  .keep_all = TRUE
+) |> dplyr::rename(
+  PreRegStatus1 = "Status"
+),
+by = "FormID"
+) |> dplyr::left_join(
+PISCF |> dplyr::select(
+  FormID,
+  RegistryStatus
+) |> distinct(
+  FormID,
+.keep_all = TRUE
+) |> dplyr::rename(
+  PISCFStatus1 = "RegistryStatus"
+),
+by = "FormID"
+) |> dplyr::left_join(
+  AdminTable |> dplyr::select(
+    TreatmentID,
+    ProcessStatus
+  ) |> dplyr::filter(
+    stringr::str_detect(ProcessStatus,"Duplicate", negate = TRUE)
+),
+by = "TreatmentID"
+) |> dplyr::rename(
+  AdminStatus1 = "ProcessStatus"
+) |> dplyr::left_join(
+CAFTable |> dplyr::select(
+  TreatmentID,
+  ProcessStatus,
+  TimepointCAF
+) |> dplyr::rename(
+  CAFStatus1 = "ProcessStatus"
+) |> dplyr::filter(
+  TimepointCAF == "Pre_Treatment",
+  stringr::str_detect(CAFStatus1,"Duplicate", negate = TRUE)
+) |> dplyr::select(
+  -TimepointCAF
+),
+by = "TreatmentID"
+) |> dplyr::left_join( # need to standardise to treatmentID for those missing (create from URN + ".1"); existing treatment
+  # for existing treatment not current treatment for which that 9999999-URN with a .1 for treatmentid and another .1 for formid
+ACAF |> dplyr::select(
+  URN,
+  ProcessStatus
+) |> dplyr::rename(
+  ACAFStatus1 = "ProcessStatus"
+) |> dplyr::filter(
+  stringr::str_detect(ACAFStatus1,"Duplicate", negate = TRUE)
+),
+by = "URN"
+)
 
 ```
 
-# Missingness and Compliance
+```{r}
+InviteN <- nrow(CurrSTROBE)
+PreRegN <- nrow(CurrSTROBE |> dplyr::filter(!is.na(PreRegStatus1)))
+PreRegPerc <- round((PreRegN/InviteN)*100,1)
+ScreenInN <- nrow(CurrSTROBE |> dplyr::filter(stringr::str_detect(PreRegStatus1,"PISCF")))
+ScreenInPerc <- round((ScreenInN/PreRegN)*100,1)
+PISCFN <- nrow(CurrSTROBE |> dplyr::filter(
+  stringr::str_detect(PreRegStatus1,"PISCF"),
+  !is.na(PISCFStatus1)
+  )
+)
+PISCFPerc <- round((PISCFN/ScreenInN)*100,1)
+
+
+```
+
+*Do patients engage with attempts to recruit them prior to initial clinic consults?*
+
+```{epoxy}
+
+Since commencement of SHARKSv2, the system has attempted to recruit {InviteN} individuals in the Registry with sms. Of those, {PreRegN} engaged with the link provided and attempted to screen themselves into the Registry, an engagement rate of {PreRegPerc}%.
+
+Of those engaging with the invitation, {ScreenInPerc}% screened themselves to the consent form (N = {ScreenInN}), but only {PISCFPerc}% of this subgroup (N = {PISCFN}) provided consent to participate.
+
+```
 
 ```{r}
-#| label: missingness-baseline
 
-naniar::gg_miss_var(
-  Snapshot |> dplyr::filter(
-      EligibleAtPreop == "Yes"
-      ) |> dplyr::select(
-    RegistryCohortName,
-    VR12PCS_Preop
-    ), 
-  facet = RegistryCohortName,
-  show_pct = TRUE
+CurrSTROBE_AF1 <- CurrSTROBE |> dplyr::filter(
+  !is.na(PISCFStatus1)
+  ) |> mutate(
+    AdminStatus2 = if_else(
+      is.na(AdminStatus1),
+      "Not Actioned",
+      AdminStatus1
+    )
   )
 
 
+CurrSTROBE_AF2 <- CurrSTROBE |> dplyr::filter(
+  !is.na(AdminStatus1)
+  ) |> mutate(
+    CAFStatus2 = if_else(
+      is.na(AdminStatus1) & !is.na(PISCFStatus1),
+      "Not Actioned",
+      AdminStatus1
+    )
+  )
+
+```
+
+*Do Department staff engage with the registry interface?*
+
+::: {fig-traffic}
+![SHARKSRegistry.com traffic Nov-Apr](Website%20Traffic%20Apr%202025.png)
+:::
+
+*Do Department staff engage with records of new patients flagged on consult lists?*
+
+```{r}
+
+
+Table1 <- gtsummary::tbl_cross(
+  CurrSTROBE_AF1,
+  row = PISCFStatus1,
+  col = AdminStatus2,
+  percent = "row"
+)
+
+Table1a <- gtsummary::tbl_cross( # For inline text retrieval in epoxy)
+  CurrSTROBE_AF1,
+  row = PISCFStatus1,
+  col = AdminStatus2
+)
+
+knitr::knit_print(
+  Table1
+)
+
+```
+
+```{r}
+
+NewMissed <- as.numeric(gtsummary::inline_text(Table1a, row_level = "Patient added to database", col_level = "Not Actioned"))
+NewTotal <- as.numeric(gtsummary::inline_text(Table1a, row_level = "Patient added to database", col_level = "stat_0"))
+
+ClinicAdminN <- nrow(AdminTable |> dplyr::filter(
+  !(TreatmentID %in% CurrSTROBE$TreatmentID),
+  stringr::str_detect(ProcessStatus,"Duplicate", negate = TRUE),
+  stringr::str_detect(ConsultationOutcome,"Surgery", negate = TRUE)
+))
+
+SumReturnN <- sum(ConsultCount$`Existing treatment records`, na.rm = TRUE) - round(sum(ConsultCount$`Existing treatment records`, na.rm = TRUE)*0.4,0)
+
+SurgeryN <- SnapshotComb |> dplyr::filter(
+  DateTreatment > ymd("20240820")
+)
+
+SurgeryDataN <- nrow(
+  SurgeryN |> dplyr::filter(
+    !is.na(Procedure)
+  )
+)
+
+ACAFN <- nrow(CurrSTROBE |> dplyr::filter(
+  (is.na(PreRegStatus1) | is.na(PISCFStatus1)),
+  !is.na(ACAFStatus1),
+  stringr::str_detect(ACAFStatus1,"(Records added)")
+))
+
+```
+
+```{epoxy}
+
+
+The rate of newly added records not actioned in clinic is extremely high (N = {NewMissed - ACAFN}), which is a {100 - round(((NewMissed - ACAFN)/NewTotal)*100,1)}% engagement rate with newly added records.
+
+The number of clinic forms for returning patients is also low (N = {ClinicAdminN}) relative to the number of returning records with clinic appointmentss (N = {SumReturnN}).
+
+The rate of returned intraoperative forms is also low, with {SurgeryDataN} forms returned from {nrow(SurgeryN)} scheduled cases ({round((SurgeryDataN/nrow(SurgeryN))*100,1)}%) performed since implementation of SHARKSv2.
+
+In addition, there are {nrow(SnapshotGen)} cases that remain in the General cohort and have not been recategorised based on clinic input.
+```
+
+```{r}
+Table2 <- gtsummary::tbl_cross(
+  CurrSTROBE_CAF2,
+  row = PISCFStatus1,
+  col = CAFStatus2,
+  percent = "row"
+)
+
+knitr::knit_print(
+  Table2
+)
 ```
 
 # STROBE by Region
@@ -508,7 +743,7 @@ CurrentDate <- as.character("20250331")
 
 STROBEFlow3 <- STROBEFlow2 |> dplyr::mutate(
   Joint = case_when(
-    stringr::str_detect(RegistryCohortName,"^G|^R") ~ "Shoulder",
+    stringr::str_detect(RegistryCohortName,"(GH)|^R") ~ "Shoulder",
     stringr::str_detect(RegistryCohortName,"^K|^T") ~ "Knee",
     stringr::str_detect(RegistryCohortName,"^H") ~ "Hip",
   ),
@@ -536,6 +771,13 @@ STROBEFlow3 <- STROBEFlow2 |> dplyr::mutate(
 )
 ) |> dplyr::rename(
   trialno = "TreatmentID",
+  arm3 = "Joint"
+)
+
+
+STROBEFlow3a <- STROBEFlow3 |> dplyr::rename(
+  Joint = "arm3"
+) |> dplyr::rename(
   arm3 = "RegistryCohortName"
 )
 
@@ -545,7 +787,26 @@ STROBEFlow3 <- STROBEFlow2 |> dplyr::mutate(
 #| label: fig-strobe
 #| fig-cap: "Flowchart of extraction and followup of sample from the Registry"
 
-STROBEPlot1 <- consort_plot(data = STROBEFlow3 |> dplyr::filter(is.na(Joint) | Joint == "Shoulder"),
+
+STROBEPlotMain <- consort_plot(
+  data = STROBEFlow3,
+ orders = c(
+   trialno = "Population",
+   exclusion1 = "Ineligible",
+   trialno = "Baseline Analysis",
+   arm3 = "Joint",
+   lost_followup = "Excluded",
+   mitt = "Followup Analysis"
+   ),
+ side_box = c(
+   "exclusion1",
+   "lost_followup"
+   ),
+ allocation = "arm3",
+ cex = 0.6
+)
+
+STROBEPlot1 <- consort_plot(data = STROBEFlow3a |> dplyr::filter(Joint == "Shoulder"),
                     orders = c(trialno = "Population",
                                exclusion1 = "Ineligible",
                                trialno = "Baseline Analysis",
@@ -562,7 +823,7 @@ STROBEPlot1 <- consort_plot(data = STROBEFlow3 |> dplyr::filter(is.na(Joint) | J
 )
 
 
-STROBEPlot2 <- consort_plot(data = STROBEFlow3 |> dplyr::filter(is.na(Joint) | Joint == "Knee"),
+STROBEPlot2 <- consort_plot(data = STROBEFlow3a |> dplyr::filter(Joint == "Knee"),
                     orders = c(trialno = "Population",
                                exclusion1 = "Ineligible",
                                trialno = "Baseline Analysis",
@@ -578,7 +839,7 @@ STROBEPlot2 <- consort_plot(data = STROBEFlow3 |> dplyr::filter(is.na(Joint) | J
                     cex = 0.6
 )
 
-STROBEPlot3 <- consort_plot(data = STROBEFlow3 |> dplyr::filter(Joint == "Hip"),
+STROBEPlot3 <- consort_plot(data = STROBEFlow3a |> dplyr::filter(Joint == "Hip"),
                     orders = c(trialno = "Population",
                                exclusion1 = "Ineligible",
                                trialno = "Baseline Analysis",
@@ -594,7 +855,7 @@ STROBEPlot3 <- consort_plot(data = STROBEFlow3 |> dplyr::filter(Joint == "Hip"),
                     cex = 0.6
 )
 
-
+knitr::knit_print(STROBEPlotMain)
 knitr::knit_print(STROBEPlot1)
 knitr::knit_print(STROBEPlot2)
 knitr::knit_print(STROBEPlot3)
@@ -644,99 +905,39 @@ knitr::knit_print(cumulative_plot)
 
 ```
 
+# Missingness and Compliance
+
+```{r}
+#| label: missingness-baseline
+
+gg_miss_fct(SnapshotComb |> dplyr::filter(
+      EligibleAtPreop == "Yes" | EligibleAtIntraop == "Yes"
+      ) |> dplyr::select(
+        VR12PCS_Preop,
+        Procedure,
+        TreatmentProvider, 
+        Cohort
+        ), 
+      Cohort
+      )
+
+
+```
+
+KneeArthritis after ROSA backfilling
+
 # Cohort Analysis
 
-## Knee Arthritis
-
 ```{r}
+#| label: baseline-vr12
+#| fig-cap: "Summary of VR12-PCS at baseline by cohort"
 
-SnapshotKA <- Snapshot |> dplyr::filter(RegistryCohortName == "KneeArthritis")|> rename_with(
-  ~gsub("Atx","At_",.x, fixed = TRUE)
-) |> rename(
-  EligibleAt_Preop = "EligibleAtPreop"
-)
-
-PROMKA <- SnapshotKA |> dplyr::select(
-  TreatmentID,
-  starts_with("OKS"),
-  #starts_with("Tegner"),
-  starts_with("EligibleAt"),
-  -EligibleAtIntraop
-) |> pivot_longer(
-  cols = !TreatmentID,
-  names_to = c(".value","TimePoint"),
-  names_sep = "_",
-  values_drop_na = TRUE
-) |> mutate(
-  TimePoint = factor(TimePoint, levels = c("Preop","3months","12months","24months","60months"), ordered = TRUE, exclude = NA),
-) |> dplyr::filter(
-  EligibleAt == "Yes",
-  !is.na(TimePoint)
-)
-
-```
-
-```{r}
-
-naniar::gg_miss_var(
-  PROMKA |> dplyr::select(
-    TimePoint,
-    OKSScore
-    ), 
-  facet = TimePoint,
-  show_pct = TRUE
-  )
-
-```
-
-```{r}
-
-PROMKA1 <- PROMKA |> left_join(
-  STROBEFlow3 |> dplyr::select(
-    trialno,
-    PatientCreationDate
-  ) |> dplyr::mutate(CreationYear = lubridate::year(PatientCreationDate)),
-  join_by(TreatmentID == trialno)
-) |> dplyr::filter(
-  TimePoint == "Preop"
-  ) |> dplyr::select(
-  CreationYear,
-  OKSScore
-)
-
-gg_miss_fct(PROMKA1, CreationYear)
-
-```
-
-```{r}
-#| label: kna-oks
-#| fig-cap: "Summary of OKS by Timepoint"
-
-FigureOKS <- PROMKA |>
-  ggplot(aes(y = OKSScore, x = TimePoint)) +
-  stat_halfeye() + 
-   # Add a red ellipse to highlight scores above 42 at Preop
-  ggforce::geom_ellipse(aes(x0 = which(levels(PROMKA$TimePoint) == "Preop"), 
-                    y0 = 45, 
-                    a = 0.3, 
-                    b = 5, 
-                    angle = 0),
-               color = "red", 
-               size = 1.2,
-               inherit.aes = FALSE) +
-  # Add an annotation label
-  annotate("text", 
-           x = which(levels(PROMKA$TimePoint) == "Preop") + 0.4, 
-           y = 48,
-           label = "High preop scores",
-           color = "red",
-           fontface = "bold",
-           size = 3.5) +
-  # Improve the overall appearance
-  theme_minimal()
+FigureVR12PCS <- Snapshot |> dplyr::filter(RegistryCohortName != "KneeDeformity") |>
+  ggplot(aes(y = RegistryCohortName, x = VR12PCS_Preop)) +
+  stat_halfeye()
 
 
-knitr::knit_print(FigureOKS)
+knitr::knit_print(FigureVR12PCS)
 
 ```
 
@@ -802,6 +1003,99 @@ knitr::knit_print(FigureSANE)
 
 ```
 
+## Knee Arthritis
+
+```{r}
+
+SnapshotKA <- Snapshot |> dplyr::filter(RegistryCohortName == "KneeArthritis")|> rename_with(
+  ~gsub("Atx","At_",.x, fixed = TRUE)
+) |> rename(
+  EligibleAt_Preop = "EligibleAtPreop"
+)
+
+PROMKA <- SnapshotKA |> dplyr::select(
+  TreatmentID,
+  starts_with("OKS"),
+  #starts_with("Tegner"),
+  starts_with("EligibleAt"),
+  -EligibleAtIntraop
+) |> pivot_longer(
+  cols = !TreatmentID,
+  names_to = c(".value","TimePoint"),
+  names_sep = "_",
+  values_drop_na = TRUE
+) |> mutate(
+  TimePoint = factor(TimePoint, levels = c("Preop","3months","12months","24months","60months"), ordered = TRUE, exclude = NA),
+) |> dplyr::filter(
+  EligibleAt == "Yes",
+  !is.na(TimePoint)
+)
+
+```
+
+```{r}
+
+PROM_OKS <- PROMKA |> dplyr::select(
+  OKSScore,
+  TimePoint
+) |> dplyr::group_by(
+  TimePoint
+) |> miss_var_summary()
+
+gg_miss_fct(PROMKA |> dplyr::select(contains("Score"), TimePoint), TimePoint)
+```
+
+```{r}
+
+PROMKA1 <- PROMKA |> left_join(
+  STROBEFlow3 |> dplyr::select(
+    trialno,
+    PatientCreationDate
+  ) |> dplyr::mutate(CreationYear = lubridate::year(PatientCreationDate)),
+  join_by(TreatmentID == trialno)
+) |> dplyr::filter(
+  TimePoint == "Preop"
+  ) |> dplyr::select(
+  CreationYear,
+  OKSScore
+)
+
+gg_miss_fct(PROMKA1, CreationYear)
+
+```
+
+```{r}
+#| label: fig-oks
+#| fig-cap: "Summary of OKS by Timepoint"
+
+FigureOKS <- PROMKA |>
+  ggplot(aes(y = OKSScore, x = TimePoint)) +
+  stat_halfeye() + 
+   # Add a red ellipse to highlight scores above 42 at Preop
+  ggforce::geom_ellipse(aes(x0 = which(levels(PROMKA$TimePoint) == "Preop"), 
+                    y0 = 45, 
+                    a = 0.3, 
+                    b = 5, 
+                    angle = 0),
+               color = "red", 
+               size = 1.2,
+               inherit.aes = FALSE) +
+  # Add an annotation label
+  annotate("text", 
+           x = which(levels(PROMKA$TimePoint) == "Preop") + 0.4, 
+           y = 48,
+           label = "High preop scores",
+           color = "red",
+           fontface = "bold",
+           size = 3.5) +
+  # Improve the overall appearance
+  theme_minimal()
+
+
+knitr::knit_print(FigureOKS)
+
+```
+
 ## Tibiofemoral Instability
 
 ```{r}
@@ -826,6 +1120,7 @@ PROMTFI <- SnapshotTFI |> dplyr::select(
   values_drop_na = TRUE
 ) |> mutate(
   TimePoint = factor(TimePoint, levels = c("Preop","3months","9months","12months","24months","60months"), ordered = TRUE, exclude = NA),
+  IKDCScore = as.numeric(IKDCScore)
 ) |> dplyr::filter(
   EligibleAt == "Yes",
   !is.na(TimePoint)
@@ -836,14 +1131,7 @@ PROMTFI <- SnapshotTFI |> dplyr::select(
 
 ```{r}
 
-naniar::gg_miss_var(
-  PROMTFI |> dplyr::select(
-    TimePoint,
-    IKDCScore
-    ), 
-  facet = TimePoint,
-  show_pct = TRUE
-  )
+gg_miss_fct(PROMTFI |> dplyr::select(contains("Score"), TimePoint), TimePoint)
 ```
 
 ```{r}
@@ -869,64 +1157,53 @@ gg_miss_fct(PROMTFI1, CreationYear)
 
 ```
 
-# Current STROBE
-
 ```{r}
+#| label: fig-ikdc
+#| fig-cap: "Summary of OKS by Timepoint"
 
-CurrSTROBE <- Invite |> dplyr::select(
-Timestamp,
-Timepoint,
-FormID,
-AppointmentDate,
-URN,
-DateofBirth,
-Sex,
-ApptType,
-Resource,
-AdditionDate
-) |> distinct(
-  URN,
-  .keep_all = TRUE
-) |> dplyr::mutate(
-  TreatmentID = stringr::str_replace(FormID, "\\.[^\\.]*$", "")
-  ) |> dplyr::left_join(
-PreReg |> dplyr::select(
-  FormID,
-  Status
-) |> distinct(
-  FormID,
-  .keep_all = TRUE
-) |> dplyr::rename(
-  PreRegStatus1 = "Status"
-),
-by = "FormID"
-) |> dplyr::left_join(
-PISCF |> dplyr::select(
-  FormID,
-  RegistryStatus
-) |> distinct(
-  FormID,
-.keep_all = TRUE
-) |> dplyr::rename(
-  PISCFStatus1 = "RegistryStatus"
-),
-by = "FormID"
-) |> dplyr::left_join(
-CAFTable |> dplyr::select(
-  TreatmentID,
-  ProcessStatus,
-  TimepointCAF
-) |> dplyr::rename(
-  CAFStatus1 = "ProcessStatus"
-) |> dplyr::filter(
-  TimepointCAF == "Pre_Treatment",
-  stringr::str_detect(CAFStatus1,"Duplicate", negate = TRUE)
-) |> dplyr::select(
-  -TimepointCAF
-),
-by = "TreatmentID"
-)
+FigureIKDC <- PROMTFI |>
+  ggplot(aes(y = IKDCScore, x = TimePoint)) +
+  stat_halfeye() + 
+   # Add a red ellipse to highlight scores above 42 at Preop
+  ggforce::geom_ellipse(aes(x0 = which(levels(PROMTFI$TimePoint) == "Preop"), 
+                    y0 = 80, 
+                    a = 0.3, 
+                    b = 5, 
+                    angle = 0),
+               color = "red", 
+               size = 1.2,
+               inherit.aes = FALSE) +
+  # Add an annotation label
+  annotate("text", 
+           x = which(levels(PROMTFI$TimePoint) == "Preop") + 0.4, 
+           y = 90,
+           label = "High preop scores",
+           color = "red",
+           fontface = "bold",
+           size = 3.5) +
+  # Improve the overall appearance
+  theme_minimal()
+
+
+knitr::knit_print(FigureIKDC)
 
 ```
 
-Unique values for the invites; repeat CAFs for the same patient (different dates) and then multiple PISCF attempts (
+## Hip Arthroplasty
+
+
+
+
+
+## Glenohumeral Arthritis
+
+
+
+
+## Glenohumeral Instability
+
+
+
+## Rotator Cuff
+
+
