@@ -667,7 +667,7 @@ ClinicAdminN <- nrow(AdminTable |> dplyr::filter(
 
 SumReturnN <- sum(ConsultCount$`Existing treatment records`, na.rm = TRUE) - round(sum(ConsultCount$`Existing treatment records`, na.rm = TRUE)*0.4,0)
 
-SurgeryN <- SnapshotComb |> dplyr::filter(
+SurgeryN <- Snapshot |> dplyr::filter(
   DateTreatment > ymd("20240820")
 )
 
@@ -685,6 +685,20 @@ ACAFN <- nrow(CurrSTROBE |> dplyr::filter(
 
 ```
 
+
+```{r}
+SnapshotGen <- Snapshot |> filter(
+  RegistryCohortName == "General"
+) |> dplyr::mutate(
+  Condition = case_when(
+    is.na(InjurySymptomClassification_Preop) ~ NA_character_,
+    !is.na(InjurySymptomClassification_Preop) & stringr::str_detect(InjurySymptomClassification_Preop, "injury") ~ "Injury",
+    !is.na(InjurySymptomClassification_Preop) & stringr::str_detect(InjurySymptomClassification_Preop, "injury", negate = TRUE) ~ "Chronic"
+  )
+)
+```
+
+
 ```{epoxy}
 
 
@@ -699,7 +713,7 @@ In addition, there are {nrow(SnapshotGen)} cases that remain in the General coho
 
 ```{r}
 Table2 <- gtsummary::tbl_cross(
-  CurrSTROBE_CAF2,
+  CurrSTROBE_AF2,
   row = PISCFStatus1,
   col = CAFStatus2,
   percent = "row"
@@ -907,24 +921,272 @@ knitr::knit_print(cumulative_plot)
 
 # Missingness and Compliance
 
-```{r}
-#| label: missingness-baseline
+## Baseline and Intraoperative
 
-gg_miss_fct(SnapshotComb |> dplyr::filter(
+```{r}
+#| label: fig-baseline-miss
+#| fig-cap: "Missingness of baseline PROMs and intraoperative date by registry cohort"
+
+gg_miss_fct(Snapshot |> dplyr::filter(
       EligibleAtPreop == "Yes" | EligibleAtIntraop == "Yes"
       ) |> dplyr::select(
         VR12PCS_Preop,
         Procedure,
         TreatmentProvider, 
-        Cohort
+        RegistryCohortName
         ), 
-      Cohort
+      RegistryCohortName
       )
 
 
 ```
 
-KneeArthritis after ROSA backfilling
+
+## Patient-reported Outcomes by TimePoint
+
+
+```{r}
+#| label: fig-kneearthritis-miss
+#| fig-cap: "Missingness of Oxford Knee Score by Timepoint in the Knee Arthritis cohort"
+
+SnapshotKA <- Snapshot |> dplyr::filter(RegistryCohortName == "KneeArthritis")|> rename_with(
+  ~gsub("Atx","At_",.x, fixed = TRUE)
+) |> rename(
+  EligibleAt_Preop = "EligibleAtPreop"
+)
+
+PROMKA <- SnapshotKA |> dplyr::select(
+  TreatmentID,
+  starts_with("OKS"),
+  #starts_with("Tegner"),
+  starts_with("EligibleAt"),
+  -EligibleAtIntraop
+) |> pivot_longer(
+  cols = !TreatmentID,
+  names_to = c(".value","TimePoint"),
+  names_sep = "_",
+  values_drop_na = TRUE
+) |> mutate(
+  TimePoint = factor(TimePoint, levels = c("Preop","3months","12months","24months","60months"), ordered = TRUE, exclude = NA),
+) |> dplyr::filter(
+  EligibleAt == "Yes",
+  !is.na(TimePoint)
+)
+
+
+
+gg_miss_fct(PROMKA |> dplyr::select(contains("Score"), TimePoint), TimePoint)
+```
+
+
+
+```{r}
+#| label: fig-hiparthro-miss
+#| fig-cap: "Missingness of Oxford Hip Score by Timepoint in the Hip Arthroplasty cohort"
+
+SnapshotHA <- Snapshot |> dplyr::filter(RegistryCohortName == "HipArthroplasty")|> rename_with(
+  ~gsub("Atx","At_",.x, fixed = TRUE)
+) |> rename(
+  EligibleAt_Preop = "EligibleAtPreop"
+)
+
+PROMHA <- SnapshotHA |> dplyr::select(
+  TreatmentID,
+  starts_with("OHS"),
+  #starts_with("Tegner"),
+  starts_with("EligibleAt"),
+  -EligibleAtIntraop
+) |> pivot_longer(
+  cols = !TreatmentID,
+  names_to = c(".value","TimePoint"),
+  names_sep = "_",
+  values_drop_na = TRUE
+) |> mutate(
+  TimePoint = factor(TimePoint, levels = c("Preop","3months","12months","24months","60months"), ordered = TRUE, exclude = NA),
+) |> dplyr::filter(
+  EligibleAt == "Yes",
+  !is.na(TimePoint)
+)
+
+
+
+gg_miss_fct(PROMHA |> dplyr::select(contains("Score"), TimePoint), TimePoint)
+```
+
+
+
+
+```{r}
+#| label: fig-tfi-miss
+#| fig-cap: "Missingness of IKDC2000 Score by Timepoint in the Tibiofemoral Instability cohort"
+
+
+SnapshotTFI <- Snapshot |> dplyr::filter(
+  RegistryCohortName == "TFInstability"
+) |> rename_with(
+  ~gsub("Atx","At_",.x, fixed = TRUE)
+) |> rename(
+  EligibleAt_Preop = "EligibleAtPreop"
+)
+
+PROMTFI <- SnapshotTFI |> dplyr::select(
+  TreatmentID,
+  starts_with("IKDC"),
+  starts_with("Tegner"),
+  starts_with("EligibleAt"),
+  -EligibleAtIntraop
+) |> pivot_longer(
+  cols = !TreatmentID,
+  names_to = c(".value","TimePoint"),
+  names_sep = "_",
+  values_drop_na = TRUE
+) |> mutate(
+  TimePoint = factor(TimePoint, levels = c("Preop","3months","9months","12months","24months","60months"), ordered = TRUE, exclude = NA),
+  IKDCScore = as.numeric(IKDCScore)
+) |> dplyr::filter(
+  EligibleAt == "Yes",
+  !is.na(TimePoint)
+)
+
+#MasterPROMWORC <- MasterPROM |> filter(TimePoint != "3months")
+
+
+
+gg_miss_fct(PROMTFI |> dplyr::select(contains("Score"), TimePoint), TimePoint)
+```
+```{r}
+#| label: fig-ghi-miss
+#| fig-cap: "Missingness of Oxford Shoulder Instability Score by Timepoint in the Glenohumeral Instability cohort"
+
+
+SnapshotGHI <- Snapshot |> dplyr::filter(
+  RegistryCohortName == "GHInstability"
+) |> rename_with(
+  ~gsub("Atx","At_",.x, fixed = TRUE)
+) |> rename(
+  EligibleAt_Preop = "EligibleAtPreop"
+)
+
+PROMGHI <- SnapshotGHI |> dplyr::select(
+  TreatmentID,
+  starts_with("OSIS"),
+  starts_with("EligibleAt"),
+  -EligibleAtIntraop
+) |> pivot_longer(
+  cols = !TreatmentID,
+  names_to = c(".value","TimePoint"),
+  names_sep = "_",
+  values_drop_na = TRUE
+) |> mutate(
+  TimePoint = factor(TimePoint, levels = c("Preop","3months","9months","12months","24months","60months"), ordered = TRUE, exclude = NA),
+  OSISScore = as.numeric(OSISScore)
+) |> dplyr::filter(
+  EligibleAt == "Yes",
+  !is.na(TimePoint)
+)
+
+#MasterPROMWORC <- MasterPROM |> filter(TimePoint != "3months")
+
+
+
+gg_miss_fct(PROMGHI |> dplyr::select(contains("Score"), TimePoint), TimePoint)
+```
+
+
+## Baseline by Year
+
+
+```{r}
+#| label: fig-ka-missbase
+#| fig-cap: "Missingness of Baseline Oxford Knee Score by Year in the Knee Arthritis cohort"
+
+
+PROMKA1 <- PROMKA |> left_join(
+  STROBEFlow3 |> dplyr::select(
+    trialno,
+    PatientCreationDate
+  ) |> dplyr::mutate(CreationYear = lubridate::year(PatientCreationDate)),
+  join_by(TreatmentID == trialno)
+) |> dplyr::filter(
+  TimePoint == "Preop"
+  ) |> dplyr::select(
+  CreationYear,
+  OKSScore
+)
+
+gg_miss_fct(PROMKA1, CreationYear)
+
+```
+
+
+```{r}
+#| label: fig-ha-missbase
+#| fig-cap: "Missingness of Baseline Oxford Hip Score by Year in the Hip Arthroplasty cohort"
+
+
+PROMHA1 <- PROMHA |> left_join(
+  STROBEFlow3 |> dplyr::select(
+    trialno,
+    PatientCreationDate
+  ) |> dplyr::mutate(CreationYear = lubridate::year(PatientCreationDate)),
+  join_by(TreatmentID == trialno)
+) |> dplyr::filter(
+  TimePoint == "Preop",
+  !(CreationYear < 2018)
+  ) |> dplyr::select(
+  CreationYear,
+  OHSScore
+)
+
+gg_miss_fct(PROMHA1, CreationYear)
+
+```
+
+```{r}
+#| label: fig-tfi-missbase
+#| fig-cap: "Missingness of Baseline IKDC2000 by Year in the Tibiofemoral Instability cohort"
+
+
+PROMTFI1 <- PROMTFI |> left_join(
+  STROBEFlow3 |> dplyr::select(
+    trialno,
+    PatientCreationDate
+  ) |> dplyr::mutate(CreationYear = lubridate::year(PatientCreationDate)),
+  join_by(TreatmentID == trialno)
+) |> dplyr::filter(
+  TimePoint == "Preop",
+  !(CreationYear < 2017)
+  ) |> dplyr::select(
+  CreationYear,
+  IKDCScore
+)
+
+gg_miss_fct(PROMTFI1, CreationYear)
+
+```
+
+```{r}
+#| label: fig-ghi-missbase
+#| fig-cap: "Missingness of Baseline Oxford Shoulder Instability Score by Year in the Glenohumeral Instability cohort"
+
+
+PROMGHI1 <- PROMGHI |> left_join(
+  STROBEFlow3 |> dplyr::select(
+    trialno,
+    PatientCreationDate
+  ) |> dplyr::mutate(CreationYear = lubridate::year(PatientCreationDate)),
+  join_by(TreatmentID == trialno)
+) |> dplyr::filter(
+  TimePoint == "Preop",
+  !(CreationYear < 2017)
+  ) |> dplyr::select(
+  CreationYear,
+  OSISScore
+)
+
+gg_miss_fct(PROMGHI1, CreationYear)
+
+```
 
 # Cohort Analysis
 
@@ -943,17 +1205,7 @@ knitr::knit_print(FigureVR12PCS)
 
 ## General
 
-```{r}
-SnapshotGen <- Snapshot |> filter(
-  RegistryCohortName == "General"
-) |> dplyr::mutate(
-  Condition = case_when(
-    is.na(InjurySymptomClassification_Preop) ~ NA_character_,
-    !is.na(InjurySymptomClassification_Preop) & stringr::str_detect(InjurySymptomClassification_Preop, "injury") ~ "Injury",
-    !is.na(InjurySymptomClassification_Preop) & stringr::str_detect(InjurySymptomClassification_Preop, "injury", negate = TRUE) ~ "Chronic"
-  )
-)
-```
+
 
 ```{r}
 
@@ -1005,64 +1257,9 @@ knitr::knit_print(FigureSANE)
 
 ## Knee Arthritis
 
-```{r}
 
-SnapshotKA <- Snapshot |> dplyr::filter(RegistryCohortName == "KneeArthritis")|> rename_with(
-  ~gsub("Atx","At_",.x, fixed = TRUE)
-) |> rename(
-  EligibleAt_Preop = "EligibleAtPreop"
-)
 
-PROMKA <- SnapshotKA |> dplyr::select(
-  TreatmentID,
-  starts_with("OKS"),
-  #starts_with("Tegner"),
-  starts_with("EligibleAt"),
-  -EligibleAtIntraop
-) |> pivot_longer(
-  cols = !TreatmentID,
-  names_to = c(".value","TimePoint"),
-  names_sep = "_",
-  values_drop_na = TRUE
-) |> mutate(
-  TimePoint = factor(TimePoint, levels = c("Preop","3months","12months","24months","60months"), ordered = TRUE, exclude = NA),
-) |> dplyr::filter(
-  EligibleAt == "Yes",
-  !is.na(TimePoint)
-)
 
-```
-
-```{r}
-
-PROM_OKS <- PROMKA |> dplyr::select(
-  OKSScore,
-  TimePoint
-) |> dplyr::group_by(
-  TimePoint
-) |> miss_var_summary()
-
-gg_miss_fct(PROMKA |> dplyr::select(contains("Score"), TimePoint), TimePoint)
-```
-
-```{r}
-
-PROMKA1 <- PROMKA |> left_join(
-  STROBEFlow3 |> dplyr::select(
-    trialno,
-    PatientCreationDate
-  ) |> dplyr::mutate(CreationYear = lubridate::year(PatientCreationDate)),
-  join_by(TreatmentID == trialno)
-) |> dplyr::filter(
-  TimePoint == "Preop"
-  ) |> dplyr::select(
-  CreationYear,
-  OKSScore
-)
-
-gg_miss_fct(PROMKA1, CreationYear)
-
-```
 
 ```{r}
 #| label: fig-oks
@@ -1098,41 +1295,7 @@ knitr::knit_print(FigureOKS)
 
 ## Tibiofemoral Instability
 
-```{r}
-SnapshotTFI <- Snapshot |> dplyr::filter(
-  RegistryCohortName == "TFInstability"
-) |> rename_with(
-  ~gsub("Atx","At_",.x, fixed = TRUE)
-) |> rename(
-  EligibleAt_Preop = "EligibleAtPreop"
-)
 
-PROMTFI <- SnapshotTFI |> dplyr::select(
-  TreatmentID,
-  starts_with("IKDC"),
-  starts_with("Tegner"),
-  starts_with("EligibleAt"),
-  -EligibleAtIntraop
-) |> pivot_longer(
-  cols = !TreatmentID,
-  names_to = c(".value","TimePoint"),
-  names_sep = "_",
-  values_drop_na = TRUE
-) |> mutate(
-  TimePoint = factor(TimePoint, levels = c("Preop","3months","9months","12months","24months","60months"), ordered = TRUE, exclude = NA),
-  IKDCScore = as.numeric(IKDCScore)
-) |> dplyr::filter(
-  EligibleAt == "Yes",
-  !is.na(TimePoint)
-)
-
-#MasterPROMWORC <- MasterPROM |> filter(TimePoint != "3months")
-```
-
-```{r}
-
-gg_miss_fct(PROMTFI |> dplyr::select(contains("Score"), TimePoint), TimePoint)
-```
 
 ```{r}
 

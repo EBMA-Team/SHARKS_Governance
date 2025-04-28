@@ -1,0 +1,114 @@
+[
+  {
+    "objectID": "SHARKSGov.html",
+    "href": "SHARKSGov.html",
+    "title": "SHARKS_Governance",
+    "section": "",
+    "text": "The following analysis is a report on the activity, quality and data contained in the SHARKS registry [wiki]\n\n\nPackages were loaded initially with pacman package. Citations were applied to each library at first use in the text.\n\n\n\nAccess to SHARKS datasets was pre-authorised using the gargle package and googledrive.\n\n\n\nA function was generated to retrieve files using the googledrive package, to call on later in the analysis for processing data imports.\n\n\n\nData was retrieved using googlesheets4 to retrieve live database tables. Source files were specified and stored as global variables to call on in further functions.\nA static registry snapshot was retrieved using the pre-specified function (see Functions for Processing) and formatted using openxlsx based on the fixed date of preparation of the snapshot (30-Jun-2024) and using tidyverse syntax and associated packages (dplyr, lubridate). Date columns were prepared for further analysis using lubridate."
+  },
+  {
+    "objectID": "SHARKSGov.html#preparation",
+    "href": "SHARKSGov.html#preparation",
+    "title": "SHARKS_Governance",
+    "section": "",
+    "text": "Packages were loaded initially with pacman package. Citations were applied to each library at first use in the text."
+  },
+  {
+    "objectID": "SHARKSGov.html#authorisations",
+    "href": "SHARKSGov.html#authorisations",
+    "title": "SHARKS_Governance",
+    "section": "",
+    "text": "Access to SHARKS datasets was pre-authorised using the gargle package and googledrive."
+  },
+  {
+    "objectID": "SHARKSGov.html#functions-for-processing",
+    "href": "SHARKSGov.html#functions-for-processing",
+    "title": "SHARKS_Governance",
+    "section": "",
+    "text": "A function was generated to retrieve files using the googledrive package, to call on later in the analysis for processing data imports."
+  },
+  {
+    "objectID": "SHARKSGov.html#data-import-and-preparation",
+    "href": "SHARKSGov.html#data-import-and-preparation",
+    "title": "SHARKS_Governance",
+    "section": "",
+    "text": "Data was retrieved using googlesheets4 to retrieve live database tables. Source files were specified and stored as global variables to call on in further functions.\nA static registry snapshot was retrieved using the pre-specified function (see Functions for Processing) and formatted using openxlsx based on the fixed date of preparation of the snapshot (30-Jun-2024) and using tidyverse syntax and associated packages (dplyr, lubridate). Date columns were prepared for further analysis using lubridate."
+  },
+  {
+    "objectID": "SHARKSGov.html#general",
+    "href": "SHARKSGov.html#general",
+    "title": "SHARKS_Governance",
+    "section": "6.1 General",
+    "text": "6.1 General"
+  },
+  {
+    "objectID": "SHARKSGov.html#knee-arthritis",
+    "href": "SHARKSGov.html#knee-arthritis",
+    "title": "SHARKS_Governance",
+    "section": "6.2 Knee Arthritis",
+    "text": "6.2 Knee Arthritis\n\n\n\n\n\n\n\n\nFigure 14: Summary of OKS by Timepoint"
+  },
+  {
+    "objectID": "SHARKSGov.html#tibiofemoral-instability",
+    "href": "SHARKSGov.html#tibiofemoral-instability",
+    "title": "SHARKS_Governance",
+    "section": "6.3 Tibiofemoral Instability",
+    "text": "6.3 Tibiofemoral Instability\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 15: Summary of OKS by Timepoint"
+  },
+  {
+    "objectID": "SHARKSGov.html#hip-arthroplasty",
+    "href": "SHARKSGov.html#hip-arthroplasty",
+    "title": "SHARKS_Governance",
+    "section": "6.4 Hip Arthroplasty",
+    "text": "6.4 Hip Arthroplasty"
+  },
+  {
+    "objectID": "SHARKSGov.html#glenohumeral-arthritis",
+    "href": "SHARKSGov.html#glenohumeral-arthritis",
+    "title": "SHARKS_Governance",
+    "section": "6.5 Glenohumeral Arthritis",
+    "text": "6.5 Glenohumeral Arthritis"
+  },
+  {
+    "objectID": "SHARKSGov.html#glenohumeral-instability",
+    "href": "SHARKSGov.html#glenohumeral-instability",
+    "title": "SHARKS_Governance",
+    "section": "6.6 Glenohumeral Instability",
+    "text": "6.6 Glenohumeral Instability"
+  },
+  {
+    "objectID": "SHARKSGov.html#rotator-cuff",
+    "href": "SHARKSGov.html#rotator-cuff",
+    "title": "SHARKS_Governance",
+    "section": "6.7 Rotator Cuff",
+    "text": "6.7 Rotator Cuff"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "SHARKSGov.html#baseline-and-intraoperative",
+    "href": "SHARKSGov.html#baseline-and-intraoperative",
+    "title": "SHARKS_Governance",
+    "section": "5.1 Baseline and Intraoperative",
+    "text": "5.1 Baseline and Intraoperative\n\n\n\n\n\n\n\n\nFigure 5: Missingness of baseline PROMs and intraoperative date by registry cohort"
+  },
+  {
+    "objectID": "SHARKSGov.html#patient-reported-outcomes-by-timepoint",
+    "href": "SHARKSGov.html#patient-reported-outcomes-by-timepoint",
+    "title": "SHARKS_Governance",
+    "section": "5.2 Patient-reported Outcomes by TimePoint",
+    "text": "5.2 Patient-reported Outcomes by TimePoint\n\n\n\n\n\n\n\n\nFigure 6: Missingness of Oxford Knee Score by Timepoint in the Knee Arthritis cohort\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 7: Missingness of Oxford Hip Score by Timepoint in the Hip Arthroplasty cohort\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 8: Missingness of IKDC2000 Score by Timepoint in the Tibiofemoral Instability cohort\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 9: Missingness of Oxford Shoulder Instability Score by Timepoint in the Glenohumeral Instability cohort"
+  },
+  {
+    "objectID": "SHARKSGov.html#baseline-by-year",
+    "href": "SHARKSGov.html#baseline-by-year",
+    "title": "SHARKS_Governance",
+    "section": "5.3 Baseline by Year",
+    "text": "5.3 Baseline by Year\n\n\n\n\n\n\n\n\nFigure 10: Missingness of Baseline Oxford Knee Score by Year in the Knee Arthritis cohort\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 11: Missingness of Baseline Oxford Hip Score by Year in the Hip Arthroplasty cohort\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 12: Missingness of Baseline IKDC2000 by Year in the Tibiofemoral Instability cohort\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 13: Missingness of Baseline Oxford Shoulder Instability Score by Year in the Glenohumeral Instability cohort"
+  }
+]
