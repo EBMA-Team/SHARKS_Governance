@@ -4,7 +4,7 @@
     "href": "SHARKSGov.html",
     "title": "SHARKS_Governance",
     "section": "",
-    "text": "The following analysis is a report on the activity, quality and data contained in the SHARKS registry [wiki]\n\n\nPackages were loaded initially with pacman package. Citations were applied to each library at first use in the text.\n\n\n\nAccess to SHARKS datasets was pre-authorised using the gargle package and googledrive.\n\n\n\nA function was generated to retrieve files using the googledrive package, to call on later in the analysis for processing data imports.\n\n\n\nData was retrieved using googlesheets4 to retrieve live database tables. Source files were specified and stored as global variables to call on in further functions.\nA static registry snapshot was retrieved using the pre-specified function (see Functions for Processing) and formatted using openxlsx based on the fixed date of preparation of the snapshot (30-Jun-2024) and using tidyverse syntax and associated packages (dplyr, lubridate). Date columns were prepared for further analysis using lubridate."
+    "text": "The following analysis is a report on the activity, quality and data contained in the SHARKS registry [wiki]\nAnalysis packages were loaded initially into the R environment.\nAccess to the SHARKS datasets was pre-authorised.\nA function was generated to retrieve files using the googledrive package, to call on later in the analysis for processing data imports.\nData was retrieved from live database tables. Source files were specified and stored as global variables to call on in further functions.\nA static registry snapshot was retrieved and formatted based on the fixed date of preparation of the snapshot (31-Mar-2025)."
   },
   {
     "objectID": "SHARKSGov.html#preparation",
@@ -39,28 +39,28 @@
     "href": "SHARKSGov.html#general",
     "title": "SHARKS_Governance",
     "section": "6.1 General",
-    "text": "6.1 General"
+    "text": "6.1 General\nThe general cohort is a label for all patients entering into the registry through the invitation link sent prior to their initial clinic appointment.\n\n\n\n\n\n\n\n\nFigure 15: Summary of Self-reported Medical Comorbidity Questionnaire at baseline by condition type\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 16: Summary of EQ5D5L at baseline by condition type\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 17: Summary of VR12-PCS at baseline by condition type\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 18: Summary of SANE at baseline by condition type"
   },
   {
     "objectID": "SHARKSGov.html#knee-arthritis",
     "href": "SHARKSGov.html#knee-arthritis",
     "title": "SHARKS_Governance",
     "section": "6.2 Knee Arthritis",
-    "text": "6.2 Knee Arthritis\n\n\n\n\n\n\n\n\nFigure 14: Summary of OKS by Timepoint"
+    "text": "6.2 Knee Arthritis\n\n\n\n\n\n\n\n\nFigure 19: Summary of OKS by Timepoint\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nN = 8951\n\n\n\n\nTourniquetUse\n\n\n\n\n    Intermittent\n19 (4.8%)\n\n\n    Not Used\n63 (16%)\n\n\n    Released After Closure\n43 (11%)\n\n\n    Released Before Closure\n271 (68%)\n\n\nSoftTissueReleaseMedial\n\n\n\n\n    Combined release/tighten\n1 (0.3%)\n\n\n    Extensive\n28 (7.1%)\n\n\n    Minimal\n229 (58%)\n\n\n    None\n134 (34%)\n\n\nSoftTissueReleaseLateral\n\n\n\n\n    Combined release/tighten\n1 (0.3%)\n\n\n    Extensive\n13 (3.3%)\n\n\n    Minimal\n30 (7.7%)\n\n\n    None\n348 (89%)\n\n\nSoftTissueReleasePosteriorCapsule\n\n\n\n\n    Combined release/tighten\n1 (0.3%)\n\n\n    Extensive\n1 (0.3%)\n\n\n    Minimal\n1 (0.3%)\n\n\n    None\n389 (99%)\n\n\nSoftTissueReleaseAnterior\n\n\n\n\n    Combined release/tighten\n1 (0.3%)\n\n\n    None\n391 (100%)\n\n\nBalanceMethod\n\n\n\n\n    Manual\n4 (50%)\n\n\n    Navigation\n4 (50%)\n\n\nPatellarResurfacing\n333 (81%)\n\n\nAlignmentReference\n\n\n\n\n    All IM\n5 (1.3%)\n\n\n    IM Femur/EM Tibia\n80 (20%)\n\n\n    Navigation\n158 (40%)\n\n\n    Other - Patient specific guides\n1 (0.3%)\n\n\n    Robotic\n150 (38%)\n\n\n\n1 n (%)"
   },
   {
     "objectID": "SHARKSGov.html#tibiofemoral-instability",
     "href": "SHARKSGov.html#tibiofemoral-instability",
     "title": "SHARKS_Governance",
     "section": "6.3 Tibiofemoral Instability",
-    "text": "6.3 Tibiofemoral Instability\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 15: Summary of OKS by Timepoint"
+    "text": "6.3 Tibiofemoral Instability\n\n\n\n\n\n\n\n\nFigure 20: Summary of IKDC2000 by Timepoint"
   },
   {
     "objectID": "SHARKSGov.html#hip-arthroplasty",
     "href": "SHARKSGov.html#hip-arthroplasty",
     "title": "SHARKS_Governance",
     "section": "6.4 Hip Arthroplasty",
-    "text": "6.4 Hip Arthroplasty"
+    "text": "6.4 Hip Arthroplasty\n\n\n\n\n\n\n\n\nFigure 21: Summary of OKS by Timepoint"
   },
   {
     "objectID": "SHARKSGov.html#glenohumeral-arthritis",
@@ -73,8 +73,8 @@
     "objectID": "SHARKSGov.html#glenohumeral-instability",
     "href": "SHARKSGov.html#glenohumeral-instability",
     "title": "SHARKS_Governance",
-    "section": "6.6 Glenohumeral Instability",
-    "text": "6.6 Glenohumeral Instability"
+    "section": "6.5 Glenohumeral Instability",
+    "text": "6.5 Glenohumeral Instability\n\n\n\n\n\n\n\n\nFigure 22: Summary of OSIS by Timepoint"
   },
   {
     "objectID": "SHARKSGov.html#rotator-cuff",
@@ -95,20 +95,20 @@
     "href": "SHARKSGov.html#baseline-and-intraoperative",
     "title": "SHARKS_Governance",
     "section": "5.1 Baseline and Intraoperative",
-    "text": "5.1 Baseline and Intraoperative\n\n\n\n\n\n\n\n\nFigure 5: Missingness of baseline PROMs and intraoperative date by registry cohort"
+    "text": "5.1 Baseline and Intraoperative\n\n\n\n\n\n\n\n\nFigure 6: Missingness of baseline PROMs and intraoperative date by registry cohort"
   },
   {
     "objectID": "SHARKSGov.html#patient-reported-outcomes-by-timepoint",
     "href": "SHARKSGov.html#patient-reported-outcomes-by-timepoint",
     "title": "SHARKS_Governance",
     "section": "5.2 Patient-reported Outcomes by TimePoint",
-    "text": "5.2 Patient-reported Outcomes by TimePoint\n\n\n\n\n\n\n\n\nFigure 6: Missingness of Oxford Knee Score by Timepoint in the Knee Arthritis cohort\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 7: Missingness of Oxford Hip Score by Timepoint in the Hip Arthroplasty cohort\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 8: Missingness of IKDC2000 Score by Timepoint in the Tibiofemoral Instability cohort\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 9: Missingness of Oxford Shoulder Instability Score by Timepoint in the Glenohumeral Instability cohort"
+    "text": "5.2 Patient-reported Outcomes by TimePoint\n\n\n\n\n\n\n\n\nFigure 7: Missingness of Oxford Knee Score by Timepoint in the Knee Arthritis cohort\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 8: Missingness of Oxford Hip Score by Timepoint in the Hip Arthroplasty cohort\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 9: Missingness of IKDC2000 Score by Timepoint in the Tibiofemoral Instability cohort\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 10: Missingness of Oxford Shoulder Instability Score by Timepoint in the Glenohumeral Instability cohort"
   },
   {
     "objectID": "SHARKSGov.html#baseline-by-year",
     "href": "SHARKSGov.html#baseline-by-year",
     "title": "SHARKS_Governance",
     "section": "5.3 Baseline by Year",
-    "text": "5.3 Baseline by Year\n\n\n\n\n\n\n\n\nFigure 10: Missingness of Baseline Oxford Knee Score by Year in the Knee Arthritis cohort\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 11: Missingness of Baseline Oxford Hip Score by Year in the Hip Arthroplasty cohort\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 12: Missingness of Baseline IKDC2000 by Year in the Tibiofemoral Instability cohort\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 13: Missingness of Baseline Oxford Shoulder Instability Score by Year in the Glenohumeral Instability cohort"
+    "text": "5.3 Baseline by Year\n\n\n\n\n\n\n\n\nFigure 11: Missingness of Baseline Oxford Knee Score by Year in the Knee Arthritis cohort\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 12: Missingness of Baseline Oxford Hip Score by Year in the Hip Arthroplasty cohort\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 13: Missingness of Baseline IKDC2000 by Year in the Tibiofemoral Instability cohort\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 14: Missingness of Baseline Oxford Shoulder Instability Score by Year in the Glenohumeral Instability cohort"
   }
 ]

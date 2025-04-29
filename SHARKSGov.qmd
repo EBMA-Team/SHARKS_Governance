@@ -25,13 +25,11 @@ execute:
   message: false
 ---
 
-# Introduction
+# Preamble
 
 The following analysis is a report on the activity, quality and data contained in the SHARKS registry \[wiki\]
 
-## Preparation
-
-Packages were loaded initially with *pacman* package. Citations were applied to each library at first use in the text.
+Analysis packages were loaded initially into the *R* environment.
 
 ```{r, load-pkgs}
 
@@ -77,9 +75,7 @@ pacman::p_load(# Load required packages
   
 ```
 
-## Authorisations
-
-Access to SHARKS datasets was pre-authorised using the *gargle* package and *googledrive*.
+Access to the SHARKS datasets was pre-authorised.
 
 ```{r}
 #| label: auth2
@@ -95,8 +91,6 @@ googledrive::drive_auth(
   email = TRUE
   )
 ```
-
-## Functions for Processing
 
 A function was generated to retrieve files using the *googledrive* package, to call on later in the analysis for processing data imports.
 
@@ -142,9 +136,7 @@ get_specific_snapshot <- function(folder_name, base_folder_id = base_folder_id1)
 }
 ```
 
-## Data Import and Preparation
-
-Data was retrieved using *googlesheets4* to retrieve live database tables. Source files were specified and stored as global variables to call on in further functions.
+Data was retrieved from live database tables. Source files were specified and stored as global variables to call on in further functions.
 
 ```{r}
 #| label: live-table
@@ -427,7 +419,7 @@ ACAF <- googlesheets4::range_read(
 
 ```
 
-A static registry snapshot was retrieved using the pre-specified function (see *Functions for Processing)* and formatted using *openxlsx* based on the fixed date of preparation of the snapshot (30-Jun-2024) and using *tidyverse* syntax and associated packages (*dplyr, lubridate*). Date columns were prepared for further analysis using *lubridate*.
+A static registry snapshot was retrieved and formatted based on the fixed date of preparation of the snapshot (31-Mar-2025).
 
 ```{r}
 
@@ -685,7 +677,6 @@ ACAFN <- nrow(CurrSTROBE |> dplyr::filter(
 
 ```
 
-
 ```{r}
 SnapshotGen <- Snapshot |> filter(
   RegistryCohortName == "General"
@@ -697,7 +688,6 @@ SnapshotGen <- Snapshot |> filter(
   )
 )
 ```
-
 
 ```{epoxy}
 
@@ -798,8 +788,8 @@ STROBEFlow3a <- STROBEFlow3 |> dplyr::rename(
 ```
 
 ```{r}
-#| label: fig-strobe
-#| fig-cap: "Flowchart of extraction and followup of sample from the Registry"
+#| label: fig-strobe-joint
+#| fig-cap: "Flowchart of extraction and followup of sample from the Registry - Allocation by Joint"
 
 
 STROBEPlotMain <- consort_plot(
@@ -820,6 +810,12 @@ STROBEPlotMain <- consort_plot(
  cex = 0.6
 )
 
+```
+
+```{r}
+#| label: fig-strobe-shoulder
+#| fig-cap: "Flowchart of extraction and followup of sample from the Registry - Shoulder"
+
 STROBEPlot1 <- consort_plot(data = STROBEFlow3a |> dplyr::filter(Joint == "Shoulder"),
                     orders = c(trialno = "Population",
                                exclusion1 = "Ineligible",
@@ -836,6 +832,11 @@ STROBEPlot1 <- consort_plot(data = STROBEFlow3a |> dplyr::filter(Joint == "Shoul
                     cex = 0.6
 )
 
+```
+
+```{r}
+#| label: fig-strobe-knee
+#| fig-cap: "Flowchart of extraction and followup of sample from the Registry - Knee"
 
 STROBEPlot2 <- consort_plot(data = STROBEFlow3a |> dplyr::filter(Joint == "Knee"),
                     orders = c(trialno = "Population",
@@ -852,6 +853,12 @@ STROBEPlot2 <- consort_plot(data = STROBEFlow3a |> dplyr::filter(Joint == "Knee"
                     allocation = "arm3",
                     cex = 0.6
 )
+
+```
+
+```{r}
+#| label: fig-strobe-hip
+#| fig-cap: "Flowchart of extraction and followup of sample from the Registry - Hip"
 
 STROBEPlot3 <- consort_plot(data = STROBEFlow3a |> dplyr::filter(Joint == "Hip"),
                     orders = c(trialno = "Population",
@@ -876,7 +883,8 @@ knitr::knit_print(STROBEPlot3)
 ```
 
 ```{r}
-#| label: recruitment-progress
+#| label: fig-progress
+#| fig-cap: "Cumulative record creation within SHARKS from inception to present"
 
 
 RecordCount <- dplyr::summarise(
@@ -941,9 +949,7 @@ gg_miss_fct(Snapshot |> dplyr::filter(
 
 ```
 
-
 ## Patient-reported Outcomes by TimePoint
-
 
 ```{r}
 #| label: fig-kneearthritis-miss
@@ -978,8 +984,6 @@ PROMKA <- SnapshotKA |> dplyr::select(
 gg_miss_fct(PROMKA |> dplyr::select(contains("Score"), TimePoint), TimePoint)
 ```
 
-
-
 ```{r}
 #| label: fig-hiparthro-miss
 #| fig-cap: "Missingness of Oxford Hip Score by Timepoint in the Hip Arthroplasty cohort"
@@ -1012,9 +1016,6 @@ PROMHA <- SnapshotHA |> dplyr::select(
 
 gg_miss_fct(PROMHA |> dplyr::select(contains("Score"), TimePoint), TimePoint)
 ```
-
-
-
 
 ```{r}
 #| label: fig-tfi-miss
@@ -1054,6 +1055,7 @@ PROMTFI <- SnapshotTFI |> dplyr::select(
 
 gg_miss_fct(PROMTFI |> dplyr::select(contains("Score"), TimePoint), TimePoint)
 ```
+
 ```{r}
 #| label: fig-ghi-miss
 #| fig-cap: "Missingness of Oxford Shoulder Instability Score by Timepoint in the Glenohumeral Instability cohort"
@@ -1092,9 +1094,7 @@ PROMGHI <- SnapshotGHI |> dplyr::select(
 gg_miss_fct(PROMGHI |> dplyr::select(contains("Score"), TimePoint), TimePoint)
 ```
 
-
 ## Baseline by Year
-
 
 ```{r}
 #| label: fig-ka-missbase
@@ -1117,7 +1117,6 @@ PROMKA1 <- PROMKA |> left_join(
 gg_miss_fct(PROMKA1, CreationYear)
 
 ```
-
 
 ```{r}
 #| label: fig-ha-missbase
@@ -1190,8 +1189,10 @@ gg_miss_fct(PROMGHI1, CreationYear)
 
 # Cohort Analysis
 
+The VR12 is a *general* health questionnaire that is presented to *all* patients enrolled in the registry.
+
 ```{r}
-#| label: baseline-vr12
+#| label: fig-vr12pcs-cohort
 #| fig-cap: "Summary of VR12-PCS at baseline by cohort"
 
 FigureVR12PCS <- Snapshot |> dplyr::filter(RegistryCohortName != "KneeDeformity") |>
@@ -1203,11 +1204,26 @@ knitr::knit_print(FigureVR12PCS)
 
 ```
 
+```{r}
+#| label: fig-vr12mcs-cohort
+#| fig-cap: "Summary of VR12-MCS at baseline by cohort"
+
+FigureVR12MCS <- Snapshot |> dplyr::filter(RegistryCohortName != "KneeDeformity") |>
+  ggplot(aes(y = RegistryCohortName, x = VR12MCS_Preop)) +
+  stat_halfeye()
+
+
+knitr::knit_print(FigureVR12MCS)
+```
+
 ## General
 
-
+The general cohort is a label for all patients entering into the registry through the invitation link sent prior to their initial clinic appointment.
 
 ```{r}
+#| label: fig-smcq
+#| fig-cap: "Summary of Self-reported Medical Comorbidity Questionnaire at baseline by condition type"
+
 
 FigureSMCQ <- SnapshotGen |> dplyr::filter(
   !is.na(Condition)
@@ -1220,6 +1236,8 @@ knitr::knit_print(FigureSMCQ)
 ```
 
 ```{r}
+#| label: fig-eq5d
+#| fig-cap: "Summary of EQ5D5L at baseline by condition type"
 
 FigureEQ5D <- SnapshotGen |> dplyr::filter(
   !is.na(Condition)
@@ -1232,6 +1250,8 @@ knitr::knit_print(FigureEQ5D)
 ```
 
 ```{r}
+#| label: fig-vr12-gen
+#| fig-cap: "Summary of VR12-PCS at baseline by condition type"
 
 FigureVR12_2 <- SnapshotGen |> dplyr::filter(
   !is.na(Condition)
@@ -1244,6 +1264,8 @@ knitr::knit_print(FigureVR12_2)
 ```
 
 ```{r}
+#| label: fig-sane-gen
+#| fig-cap: "Summary of SANE at baseline by condition type"
 
 FigureSANE <- SnapshotGen |> dplyr::filter(
   !is.na(Condition)
@@ -1257,12 +1279,8 @@ knitr::knit_print(FigureSANE)
 
 ## Knee Arthritis
 
-
-
-
-
 ```{r}
-#| label: fig-oks
+#| label: fig-oks-ka
 #| fig-cap: "Summary of OKS by Timepoint"
 
 FigureOKS <- PROMKA |>
@@ -1293,36 +1311,30 @@ knitr::knit_print(FigureOKS)
 
 ```
 
-## Tibiofemoral Instability
-
-
-
 ```{r}
 
-PROMTFI1 <- PROMTFI |> left_join(
-  STROBEFlow3 |> dplyr::select(
-    trialno,
-    PatientCreationDate
-  ) |> dplyr::mutate(
-    CreationYear = lubridate::year(PatientCreationDate)
-    ) |> dplyr::filter(
-      PatientCreationDate > ymd("20160630")
-    ),
-  join_by(TreatmentID == trialno)
-) |> dplyr::filter(
-  TimePoint == "Preop"
-) |> dplyr::select(
-  CreationYear,
-  IKDCScore
-) 
+TableKAsurg <- gtsummary::tbl_summary(
+  Snapshot |> dplyr::filter(
+    RegistryCohortName == "KneeArthritis"
+  ) |> dplyr::select(
+    TourniquetUse:AlignmentReference
+  ) |> dplyr::select(
+    -(contains("Graft")),
+    -(contains("Duration"))
+  ),
+  missing = "no"
+)
 
-gg_miss_fct(PROMTFI1, CreationYear)
+knitr::knit_print(TableKAsurg)
+
 
 ```
 
+## Tibiofemoral Instability
+
 ```{r}
-#| label: fig-ikdc
-#| fig-cap: "Summary of OKS by Timepoint"
+#| label: fig-ikdc-tfi
+#| fig-cap: "Summary of IKDC2000 by Timepoint"
 
 FigureIKDC <- PROMTFI |>
   ggplot(aes(y = IKDCScore, x = TimePoint)) +
@@ -1354,19 +1366,92 @@ knitr::knit_print(FigureIKDC)
 
 ## Hip Arthroplasty
 
+```{r}
+#| label: fig-ohs-ha
+#| fig-cap: "Summary of OKS by Timepoint"
+
+FigureOHS <- PROMHA |>
+  ggplot(aes(y = OHSScore, x = TimePoint)) +
+  stat_halfeye() + 
+   # Add a red ellipse to highlight scores above 42 at Preop
+  ggforce::geom_ellipse(aes(x0 = which(levels(PROMHA$TimePoint) == "Preop"), 
+                    y0 = 45, 
+                    a = 0.3, 
+                    b = 5, 
+                    angle = 0),
+               color = "red", 
+               size = 1.2,
+               inherit.aes = FALSE) +
+  # Add an annotation label
+  annotate("text", 
+           x = which(levels(PROMHA$TimePoint) == "Preop") + 0.4, 
+           y = 48,
+           label = "High preop scores",
+           color = "red",
+           fontface = "bold",
+           size = 3.5) +
+  # Improve the overall appearance
+  theme_minimal()
 
 
+knitr::knit_print(FigureOHS)
 
-
-## Glenohumeral Arthritis
-
-
-
+```
 
 ## Glenohumeral Instability
 
+```{r}
+#| label: fig-osis-ghi
+#| fig-cap: "Summary of OSIS by Timepoint"
+
+FigureOSIS <- PROMGHI |>
+  ggplot(aes(y = OSISScore, x = TimePoint)) +
+  stat_halfeye() + 
+   # Add a red ellipse to highlight scores above 42 at Preop
+  ggforce::geom_ellipse(aes(x0 = which(levels(PROMGHI$TimePoint) == "Preop"), 
+                    y0 = 45, 
+                    a = 0.3, 
+                    b = 5, 
+                    angle = 0),
+               color = "red", 
+               size = 1.2,
+               inherit.aes = FALSE) +
+  # Add an annotation label
+  annotate("text", 
+           x = which(levels(PROMGHI$TimePoint) == "Preop") + 0.4, 
+           y = 48,
+           label = "High preop scores",
+           color = "red",
+           fontface = "bold",
+           size = 3.5) +
+  # Improve the overall appearance
+  theme_minimal()
 
 
-## Rotator Cuff
+knitr::knit_print(FigureOSIS)
 
+```
 
+## Satisfaction
+
+```{r}
+#| label: tbl-satisfaction
+#| tbl-cap: "Satisfaction likert responses for arthroplasty cohorts"
+
+Satisfaction <- Snapshot |> dplyr::select(
+  RegistryCohortName,
+  TreatmentSatisfaction_12months,
+  EligibleAtx12months
+) |> dplyr::filter(
+  RegistryCohortName == "KneeArthritis" | RegistryCohortName == "HipArthroplasty" | RegistryCohortName == "GHArthritis",
+  EligibleAtx12months == "Yes"
+)
+
+tbl_summary(
+  Satisfaction |> dplyr::select(-EligibleAtx12months),
+  by = RegistryCohortName
+)
+
+```
+
+# Recommendations

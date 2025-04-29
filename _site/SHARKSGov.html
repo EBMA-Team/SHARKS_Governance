@@ -114,13 +114,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a>
-  <ul class="collapse">
-  <li><a href="#preparation" id="toc-preparation" class="nav-link" data-scroll-target="#preparation"><span class="header-section-number">1.1</span> Preparation</a></li>
-  <li><a href="#authorisations" id="toc-authorisations" class="nav-link" data-scroll-target="#authorisations"><span class="header-section-number">1.2</span> Authorisations</a></li>
-  <li><a href="#functions-for-processing" id="toc-functions-for-processing" class="nav-link" data-scroll-target="#functions-for-processing"><span class="header-section-number">1.3</span> Functions for Processing</a></li>
-  <li><a href="#data-import-and-preparation" id="toc-data-import-and-preparation" class="nav-link" data-scroll-target="#data-import-and-preparation"><span class="header-section-number">1.4</span> Data Import and Preparation</a></li>
-  </ul></li>
+  <li><a href="#preamble" id="toc-preamble" class="nav-link active" data-scroll-target="#preamble"><span class="header-section-number">1</span> Preamble</a></li>
   <li><a href="#context" id="toc-context" class="nav-link" data-scroll-target="#context"><span class="header-section-number">2</span> Context</a></li>
   <li><a href="#engagement" id="toc-engagement" class="nav-link" data-scroll-target="#engagement"><span class="header-section-number">3</span> Engagement</a></li>
   <li><a href="#strobe-by-region" id="toc-strobe-by-region" class="nav-link" data-scroll-target="#strobe-by-region"><span class="header-section-number">4</span> STROBE by Region</a></li>
@@ -136,10 +130,9 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#knee-arthritis" id="toc-knee-arthritis" class="nav-link" data-scroll-target="#knee-arthritis"><span class="header-section-number">6.2</span> Knee Arthritis</a></li>
   <li><a href="#tibiofemoral-instability" id="toc-tibiofemoral-instability" class="nav-link" data-scroll-target="#tibiofemoral-instability"><span class="header-section-number">6.3</span> Tibiofemoral Instability</a></li>
   <li><a href="#hip-arthroplasty" id="toc-hip-arthroplasty" class="nav-link" data-scroll-target="#hip-arthroplasty"><span class="header-section-number">6.4</span> Hip Arthroplasty</a></li>
-  <li><a href="#glenohumeral-arthritis" id="toc-glenohumeral-arthritis" class="nav-link" data-scroll-target="#glenohumeral-arthritis"><span class="header-section-number">6.5</span> Glenohumeral Arthritis</a></li>
-  <li><a href="#glenohumeral-instability" id="toc-glenohumeral-instability" class="nav-link" data-scroll-target="#glenohumeral-instability"><span class="header-section-number">6.6</span> Glenohumeral Instability</a></li>
-  <li><a href="#rotator-cuff" id="toc-rotator-cuff" class="nav-link" data-scroll-target="#rotator-cuff"><span class="header-section-number">6.7</span> Rotator Cuff</a></li>
+  <li><a href="#glenohumeral-instability" id="toc-glenohumeral-instability" class="nav-link" data-scroll-target="#glenohumeral-instability"><span class="header-section-number">6.5</span> Glenohumeral Instability</a></li>
   </ul></li>
+  <li><a href="#recommendations" id="toc-recommendations" class="nav-link" data-scroll-target="#recommendations"><span class="header-section-number">7</span> Recommendations</a></li>
   </ul>
 </nav>
     </div>
@@ -183,26 +176,14 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="introduction" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<section id="preamble" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Preamble</h1>
 <p>The following analysis is a report on the activity, quality and data contained in the SHARKS registry [wiki]</p>
-<section id="preparation" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="preparation"><span class="header-section-number">1.1</span> Preparation</h2>
-<p>Packages were loaded initially with <em>pacman</em> package. Citations were applied to each library at first use in the text.</p>
-</section>
-<section id="authorisations" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="authorisations"><span class="header-section-number">1.2</span> Authorisations</h2>
-<p>Access to SHARKS datasets was pre-authorised using the <em>gargle</em> package and <em>googledrive</em>.</p>
-</section>
-<section id="functions-for-processing" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="functions-for-processing"><span class="header-section-number">1.3</span> Functions for Processing</h2>
+<p>Analysis packages were loaded initially into the <em>R</em> environment.</p>
+<p>Access to the SHARKS datasets was pre-authorised.</p>
 <p>A function was generated to retrieve files using the <em>googledrive</em> package, to call on later in the analysis for processing data imports.</p>
-</section>
-<section id="data-import-and-preparation" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="data-import-and-preparation"><span class="header-section-number">1.4</span> Data Import and Preparation</h2>
-<p>Data was retrieved using <em>googlesheets4</em> to retrieve live database tables. Source files were specified and stored as global variables to call on in further functions.</p>
-<p>A static registry snapshot was retrieved using the pre-specified function (see <em>Functions for Processing)</em> and formatted using <em>openxlsx</em> based on the fixed date of preparation of the snapshot (30-Jun-2024) and using <em>tidyverse</em> syntax and associated packages (<em>dplyr, lubridate</em>). Date columns were prepared for further analysis using <em>lubridate</em>.</p>
-</section>
+<p>Data was retrieved from live database tables. Source files were specified and stored as global variables to call on in further functions.</p>
+<p>A static registry snapshot was retrieved and formatted based on the fixed date of preparation of the snapshot (31-Mar-2025).</p>
 </section>
 <section id="context" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Context</h1>
@@ -234,23 +215,23 @@ ul.task-list li input[type="checkbox"] {
 <p><em>Do Department staff engage with records of new patients flagged on consult lists?</em></p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="cupfeibxrm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#cupfeibxrm table {
+<div id="qaklqmsget" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qaklqmsget table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#cupfeibxrm thead, #cupfeibxrm tbody, #cupfeibxrm tfoot, #cupfeibxrm tr, #cupfeibxrm td, #cupfeibxrm th {
+#qaklqmsget thead, #qaklqmsget tbody, #qaklqmsget tfoot, #qaklqmsget tr, #qaklqmsget td, #qaklqmsget th {
   border-style: none;
 }
 
-#cupfeibxrm p {
+#qaklqmsget p {
   margin: 0;
   padding: 0;
 }
 
-#cupfeibxrm .gt_table {
+#qaklqmsget .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -276,12 +257,12 @@ ul.task-list li input[type="checkbox"] {
   border-left-color: #D3D3D3;
 }
 
-#cupfeibxrm .gt_caption {
+#qaklqmsget .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#cupfeibxrm .gt_title {
+#qaklqmsget .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -293,7 +274,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-width: 0;
 }
 
-#cupfeibxrm .gt_subtitle {
+#qaklqmsget .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -305,7 +286,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-width: 0;
 }
 
-#cupfeibxrm .gt_heading {
+#qaklqmsget .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -317,13 +298,13 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#cupfeibxrm .gt_bottom_border {
+#qaklqmsget .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#cupfeibxrm .gt_col_headings {
+#qaklqmsget .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -338,7 +319,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#cupfeibxrm .gt_col_heading {
+#qaklqmsget .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -358,7 +339,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#cupfeibxrm .gt_column_spanner_outer {
+#qaklqmsget .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -370,15 +351,15 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 4px;
 }
 
-#cupfeibxrm .gt_column_spanner_outer:first-child {
+#qaklqmsget .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#cupfeibxrm .gt_column_spanner_outer:last-child {
+#qaklqmsget .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#cupfeibxrm .gt_column_spanner {
+#qaklqmsget .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -390,11 +371,11 @@ ul.task-list li input[type="checkbox"] {
   width: 100%;
 }
 
-#cupfeibxrm .gt_spanner_row {
+#qaklqmsget .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#cupfeibxrm .gt_group_heading {
+#qaklqmsget .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -420,7 +401,7 @@ ul.task-list li input[type="checkbox"] {
   text-align: left;
 }
 
-#cupfeibxrm .gt_empty_group_heading {
+#qaklqmsget .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -435,15 +416,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-#cupfeibxrm .gt_from_md > :first-child {
+#qaklqmsget .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#cupfeibxrm .gt_from_md > :last-child {
+#qaklqmsget .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#cupfeibxrm .gt_row {
+#qaklqmsget .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -462,7 +443,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#cupfeibxrm .gt_stub {
+#qaklqmsget .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -475,7 +456,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#cupfeibxrm .gt_stub_row_group {
+#qaklqmsget .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -489,15 +470,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: top;
 }
 
-#cupfeibxrm .gt_row_group_first td {
+#qaklqmsget .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#cupfeibxrm .gt_row_group_first th {
+#qaklqmsget .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#cupfeibxrm .gt_summary_row {
+#qaklqmsget .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -507,16 +488,16 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#cupfeibxrm .gt_first_summary_row {
+#qaklqmsget .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#cupfeibxrm .gt_first_summary_row.thick {
+#qaklqmsget .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#cupfeibxrm .gt_last_summary_row {
+#qaklqmsget .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -526,7 +507,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#cupfeibxrm .gt_grand_summary_row {
+#qaklqmsget .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -536,7 +517,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#cupfeibxrm .gt_first_grand_summary_row {
+#qaklqmsget .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -546,7 +527,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-color: #D3D3D3;
 }
 
-#cupfeibxrm .gt_last_grand_summary_row_top {
+#qaklqmsget .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -556,11 +537,11 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#cupfeibxrm .gt_striped {
+#qaklqmsget .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#cupfeibxrm .gt_table_body {
+#qaklqmsget .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -569,7 +550,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#cupfeibxrm .gt_footnotes {
+#qaklqmsget .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -583,7 +564,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#cupfeibxrm .gt_footnote {
+#qaklqmsget .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -592,7 +573,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#cupfeibxrm .gt_sourcenotes {
+#qaklqmsget .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -606,7 +587,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#cupfeibxrm .gt_sourcenote {
+#qaklqmsget .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -614,72 +595,72 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#cupfeibxrm .gt_left {
+#qaklqmsget .gt_left {
   text-align: left;
 }
 
-#cupfeibxrm .gt_center {
+#qaklqmsget .gt_center {
   text-align: center;
 }
 
-#cupfeibxrm .gt_right {
+#qaklqmsget .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#cupfeibxrm .gt_font_normal {
+#qaklqmsget .gt_font_normal {
   font-weight: normal;
 }
 
-#cupfeibxrm .gt_font_bold {
+#qaklqmsget .gt_font_bold {
   font-weight: bold;
 }
 
-#cupfeibxrm .gt_font_italic {
+#qaklqmsget .gt_font_italic {
   font-style: italic;
 }
 
-#cupfeibxrm .gt_super {
+#qaklqmsget .gt_super {
   font-size: 65%;
 }
 
-#cupfeibxrm .gt_footnote_marks {
+#qaklqmsget .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#cupfeibxrm .gt_asterisk {
+#qaklqmsget .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#cupfeibxrm .gt_indent_1 {
+#qaklqmsget .gt_indent_1 {
   text-indent: 5px;
 }
 
-#cupfeibxrm .gt_indent_2 {
+#qaklqmsget .gt_indent_2 {
   text-indent: 10px;
 }
 
-#cupfeibxrm .gt_indent_3 {
+#qaklqmsget .gt_indent_3 {
   text-indent: 15px;
 }
 
-#cupfeibxrm .gt_indent_4 {
+#qaklqmsget .gt_indent_4 {
   text-indent: 20px;
 }
 
-#cupfeibxrm .gt_indent_5 {
+#qaklqmsget .gt_indent_5 {
   text-indent: 25px;
 }
 
-#cupfeibxrm .katex-display {
+#qaklqmsget .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#cupfeibxrm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#qaklqmsget div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -784,23 +765,23 @@ AdminStatus2
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="rpoujpqgwx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#rpoujpqgwx table {
+<div id="zmlehctooj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#zmlehctooj table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#rpoujpqgwx thead, #rpoujpqgwx tbody, #rpoujpqgwx tfoot, #rpoujpqgwx tr, #rpoujpqgwx td, #rpoujpqgwx th {
+#zmlehctooj thead, #zmlehctooj tbody, #zmlehctooj tfoot, #zmlehctooj tr, #zmlehctooj td, #zmlehctooj th {
   border-style: none;
 }
 
-#rpoujpqgwx p {
+#zmlehctooj p {
   margin: 0;
   padding: 0;
 }
 
-#rpoujpqgwx .gt_table {
+#zmlehctooj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -826,12 +807,12 @@ AdminStatus2
   border-left-color: #D3D3D3;
 }
 
-#rpoujpqgwx .gt_caption {
+#zmlehctooj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#rpoujpqgwx .gt_title {
+#zmlehctooj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -843,7 +824,7 @@ AdminStatus2
   border-bottom-width: 0;
 }
 
-#rpoujpqgwx .gt_subtitle {
+#zmlehctooj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -855,7 +836,7 @@ AdminStatus2
   border-top-width: 0;
 }
 
-#rpoujpqgwx .gt_heading {
+#zmlehctooj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -867,13 +848,13 @@ AdminStatus2
   border-right-color: #D3D3D3;
 }
 
-#rpoujpqgwx .gt_bottom_border {
+#zmlehctooj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#rpoujpqgwx .gt_col_headings {
+#zmlehctooj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -888,7 +869,7 @@ AdminStatus2
   border-right-color: #D3D3D3;
 }
 
-#rpoujpqgwx .gt_col_heading {
+#zmlehctooj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -908,7 +889,7 @@ AdminStatus2
   overflow-x: hidden;
 }
 
-#rpoujpqgwx .gt_column_spanner_outer {
+#zmlehctooj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -920,15 +901,15 @@ AdminStatus2
   padding-right: 4px;
 }
 
-#rpoujpqgwx .gt_column_spanner_outer:first-child {
+#zmlehctooj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#rpoujpqgwx .gt_column_spanner_outer:last-child {
+#zmlehctooj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#rpoujpqgwx .gt_column_spanner {
+#zmlehctooj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -940,11 +921,11 @@ AdminStatus2
   width: 100%;
 }
 
-#rpoujpqgwx .gt_spanner_row {
+#zmlehctooj .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#rpoujpqgwx .gt_group_heading {
+#zmlehctooj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -970,7 +951,7 @@ AdminStatus2
   text-align: left;
 }
 
-#rpoujpqgwx .gt_empty_group_heading {
+#zmlehctooj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -985,15 +966,15 @@ AdminStatus2
   vertical-align: middle;
 }
 
-#rpoujpqgwx .gt_from_md > :first-child {
+#zmlehctooj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#rpoujpqgwx .gt_from_md > :last-child {
+#zmlehctooj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#rpoujpqgwx .gt_row {
+#zmlehctooj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1012,7 +993,7 @@ AdminStatus2
   overflow-x: hidden;
 }
 
-#rpoujpqgwx .gt_stub {
+#zmlehctooj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1025,7 +1006,7 @@ AdminStatus2
   padding-right: 5px;
 }
 
-#rpoujpqgwx .gt_stub_row_group {
+#zmlehctooj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1039,15 +1020,15 @@ AdminStatus2
   vertical-align: top;
 }
 
-#rpoujpqgwx .gt_row_group_first td {
+#zmlehctooj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#rpoujpqgwx .gt_row_group_first th {
+#zmlehctooj .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#rpoujpqgwx .gt_summary_row {
+#zmlehctooj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1057,16 +1038,16 @@ AdminStatus2
   padding-right: 5px;
 }
 
-#rpoujpqgwx .gt_first_summary_row {
+#zmlehctooj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#rpoujpqgwx .gt_first_summary_row.thick {
+#zmlehctooj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#rpoujpqgwx .gt_last_summary_row {
+#zmlehctooj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1076,7 +1057,7 @@ AdminStatus2
   border-bottom-color: #D3D3D3;
 }
 
-#rpoujpqgwx .gt_grand_summary_row {
+#zmlehctooj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1086,7 +1067,7 @@ AdminStatus2
   padding-right: 5px;
 }
 
-#rpoujpqgwx .gt_first_grand_summary_row {
+#zmlehctooj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1096,7 +1077,7 @@ AdminStatus2
   border-top-color: #D3D3D3;
 }
 
-#rpoujpqgwx .gt_last_grand_summary_row_top {
+#zmlehctooj .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1106,11 +1087,11 @@ AdminStatus2
   border-bottom-color: #D3D3D3;
 }
 
-#rpoujpqgwx .gt_striped {
+#zmlehctooj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#rpoujpqgwx .gt_table_body {
+#zmlehctooj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1119,7 +1100,7 @@ AdminStatus2
   border-bottom-color: #D3D3D3;
 }
 
-#rpoujpqgwx .gt_footnotes {
+#zmlehctooj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1133,7 +1114,7 @@ AdminStatus2
   border-right-color: #D3D3D3;
 }
 
-#rpoujpqgwx .gt_footnote {
+#zmlehctooj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1142,7 +1123,7 @@ AdminStatus2
   padding-right: 5px;
 }
 
-#rpoujpqgwx .gt_sourcenotes {
+#zmlehctooj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1156,7 +1137,7 @@ AdminStatus2
   border-right-color: #D3D3D3;
 }
 
-#rpoujpqgwx .gt_sourcenote {
+#zmlehctooj .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1164,72 +1145,72 @@ AdminStatus2
   padding-right: 5px;
 }
 
-#rpoujpqgwx .gt_left {
+#zmlehctooj .gt_left {
   text-align: left;
 }
 
-#rpoujpqgwx .gt_center {
+#zmlehctooj .gt_center {
   text-align: center;
 }
 
-#rpoujpqgwx .gt_right {
+#zmlehctooj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#rpoujpqgwx .gt_font_normal {
+#zmlehctooj .gt_font_normal {
   font-weight: normal;
 }
 
-#rpoujpqgwx .gt_font_bold {
+#zmlehctooj .gt_font_bold {
   font-weight: bold;
 }
 
-#rpoujpqgwx .gt_font_italic {
+#zmlehctooj .gt_font_italic {
   font-style: italic;
 }
 
-#rpoujpqgwx .gt_super {
+#zmlehctooj .gt_super {
   font-size: 65%;
 }
 
-#rpoujpqgwx .gt_footnote_marks {
+#zmlehctooj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#rpoujpqgwx .gt_asterisk {
+#zmlehctooj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#rpoujpqgwx .gt_indent_1 {
+#zmlehctooj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#rpoujpqgwx .gt_indent_2 {
+#zmlehctooj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#rpoujpqgwx .gt_indent_3 {
+#zmlehctooj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#rpoujpqgwx .gt_indent_4 {
+#zmlehctooj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#rpoujpqgwx .gt_indent_5 {
+#zmlehctooj .gt_indent_5 {
   text-indent: 25px;
 }
 
-#rpoujpqgwx .katex-display {
+#zmlehctooj .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#rpoujpqgwx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#zmlehctooj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1339,49 +1320,49 @@ CAFStatus2
 <h1 data-number="4"><span class="header-section-number">4</span> STROBE by Region</h1>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fig-strobe-1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-strobe-hip-1" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-strobe-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="SHARKSGov_files/figure-html/fig-strobe-1.png" class="img-fluid figure-img" width="672">
+<div aria-describedby="fig-strobe-hip-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="SHARKSGov_files/figure-html/fig-strobe-hip-1.png" class="img-fluid figure-img" width="672">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-strobe-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Flowchart of extraction and followup of sample from the Registry
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-strobe-hip-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Flowchart of extraction and followup of sample from the Registry - Hip
 </figcaption>
 </figure>
 </div>
 </div>
 <div class="cell-output-display">
-<div id="fig-strobe-2" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-strobe-hip-2" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-strobe-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="SHARKSGov_files/figure-html/fig-strobe-2.png" class="img-fluid figure-img" width="672">
+<div aria-describedby="fig-strobe-hip-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="SHARKSGov_files/figure-html/fig-strobe-hip-2.png" class="img-fluid figure-img" width="672">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-strobe-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: Flowchart of extraction and followup of sample from the Registry
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-strobe-hip-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Flowchart of extraction and followup of sample from the Registry - Hip
 </figcaption>
 </figure>
 </div>
 </div>
 <div class="cell-output-display">
-<div id="fig-strobe-3" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-strobe-hip-3" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-strobe-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="SHARKSGov_files/figure-html/fig-strobe-3.png" class="img-fluid figure-img" width="672">
+<div aria-describedby="fig-strobe-hip-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="SHARKSGov_files/figure-html/fig-strobe-hip-3.png" class="img-fluid figure-img" width="672">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-strobe-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3: Flowchart of extraction and followup of sample from the Registry
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-strobe-hip-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Flowchart of extraction and followup of sample from the Registry - Hip
 </figcaption>
 </figure>
 </div>
 </div>
 <div class="cell-output-display">
-<div id="fig-strobe-4" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-strobe-hip-4" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-strobe-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="SHARKSGov_files/figure-html/fig-strobe-4.png" class="img-fluid figure-img" width="672">
+<div aria-describedby="fig-strobe-hip-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="SHARKSGov_files/figure-html/fig-strobe-hip-4.png" class="img-fluid figure-img" width="672">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-strobe-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4: Flowchart of extraction and followup of sample from the Registry
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-strobe-hip-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Flowchart of extraction and followup of sample from the Registry - Hip
 </figcaption>
 </figure>
 </div>
@@ -1389,9 +1370,14 @@ Figure&nbsp;4: Flowchart of extraction and followup of sample from the Registry
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="SHARKSGov_files/figure-html/recruitment-progress-1.png" class="img-fluid figure-img" width="672"></p>
+<div id="fig-progress" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-progress-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="SHARKSGov_files/figure-html/fig-progress-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-progress-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Cumulative record creation within SHARKS from inception to present
+</figcaption>
 </figure>
 </div>
 </div>
@@ -1409,7 +1395,7 @@ Figure&nbsp;4: Flowchart of extraction and followup of sample from the Registry
 <img src="SHARKSGov_files/figure-html/fig-baseline-miss-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-baseline-miss-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5: Missingness of baseline PROMs and intraoperative date by registry cohort
+Figure&nbsp;6: Missingness of baseline PROMs and intraoperative date by registry cohort
 </figcaption>
 </figure>
 </div>
@@ -1426,7 +1412,7 @@ Figure&nbsp;5: Missingness of baseline PROMs and intraoperative date by registry
 <img src="SHARKSGov_files/figure-html/fig-kneearthritis-miss-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-kneearthritis-miss-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6: Missingness of Oxford Knee Score by Timepoint in the Knee Arthritis cohort
+Figure&nbsp;7: Missingness of Oxford Knee Score by Timepoint in the Knee Arthritis cohort
 </figcaption>
 </figure>
 </div>
@@ -1440,7 +1426,7 @@ Figure&nbsp;6: Missingness of Oxford Knee Score by Timepoint in the Knee Arthrit
 <img src="SHARKSGov_files/figure-html/fig-hiparthro-miss-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hiparthro-miss-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7: Missingness of Oxford Hip Score by Timepoint in the Hip Arthroplasty cohort
+Figure&nbsp;8: Missingness of Oxford Hip Score by Timepoint in the Hip Arthroplasty cohort
 </figcaption>
 </figure>
 </div>
@@ -1454,7 +1440,7 @@ Figure&nbsp;7: Missingness of Oxford Hip Score by Timepoint in the Hip Arthropla
 <img src="SHARKSGov_files/figure-html/fig-tfi-miss-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tfi-miss-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8: Missingness of IKDC2000 Score by Timepoint in the Tibiofemoral Instability cohort
+Figure&nbsp;9: Missingness of IKDC2000 Score by Timepoint in the Tibiofemoral Instability cohort
 </figcaption>
 </figure>
 </div>
@@ -1468,7 +1454,7 @@ Figure&nbsp;8: Missingness of IKDC2000 Score by Timepoint in the Tibiofemoral In
 <img src="SHARKSGov_files/figure-html/fig-ghi-miss-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ghi-miss-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9: Missingness of Oxford Shoulder Instability Score by Timepoint in the Glenohumeral Instability cohort
+Figure&nbsp;10: Missingness of Oxford Shoulder Instability Score by Timepoint in the Glenohumeral Instability cohort
 </figcaption>
 </figure>
 </div>
@@ -1485,7 +1471,7 @@ Figure&nbsp;9: Missingness of Oxford Shoulder Instability Score by Timepoint in 
 <img src="SHARKSGov_files/figure-html/fig-ka-missbase-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ka-missbase-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;10: Missingness of Baseline Oxford Knee Score by Year in the Knee Arthritis cohort
+Figure&nbsp;11: Missingness of Baseline Oxford Knee Score by Year in the Knee Arthritis cohort
 </figcaption>
 </figure>
 </div>
@@ -1499,7 +1485,7 @@ Figure&nbsp;10: Missingness of Baseline Oxford Knee Score by Year in the Knee Ar
 <img src="SHARKSGov_files/figure-html/fig-ha-missbase-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ha-missbase-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;11: Missingness of Baseline Oxford Hip Score by Year in the Hip Arthroplasty cohort
+Figure&nbsp;12: Missingness of Baseline Oxford Hip Score by Year in the Hip Arthroplasty cohort
 </figcaption>
 </figure>
 </div>
@@ -1513,7 +1499,7 @@ Figure&nbsp;11: Missingness of Baseline Oxford Hip Score by Year in the Hip Arth
 <img src="SHARKSGov_files/figure-html/fig-tfi-missbase-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tfi-missbase-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;12: Missingness of Baseline IKDC2000 by Year in the Tibiofemoral Instability cohort
+Figure&nbsp;13: Missingness of Baseline IKDC2000 by Year in the Tibiofemoral Instability cohort
 </figcaption>
 </figure>
 </div>
@@ -1527,7 +1513,7 @@ Figure&nbsp;12: Missingness of Baseline IKDC2000 by Year in the Tibiofemoral Ins
 <img src="SHARKSGov_files/figure-html/fig-ghi-missbase-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ghi-missbase-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13: Missingness of Baseline Oxford Shoulder Instability Score by Year in the Glenohumeral Instability cohort
+Figure&nbsp;14: Missingness of Baseline Oxford Shoulder Instability Score by Year in the Glenohumeral Instability cohort
 </figcaption>
 </figure>
 </div>
@@ -1537,50 +1523,82 @@ Figure&nbsp;13: Missingness of Baseline Oxford Shoulder Instability Score by Yea
 </section>
 <section id="cohort-analysis" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> Cohort Analysis</h1>
+<p>The VR12 is a <em>general</em> health questionnaire that is presented to <em>all</em> patients enrolled in the registry.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="SHARKSGov_files/figure-html/baseline-vr12-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="SHARKSGov_files/figure-html/baseline-vr12pcs-1.png" class="img-fluid figure-img" width="672"></p>
 <figcaption>Summary of VR12-PCS at baseline by cohort</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="SHARKSGov_files/figure-html/baseline-vr12mcs-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Summary of VR12-MCS at baseline by cohort</figcaption>
 </figure>
 </div>
 </div>
 </div>
 <section id="general" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="general"><span class="header-section-number">6.1</span> General</h2>
+<p>The general cohort is a label for all patients entering into the registry through the invitation link sent prior to their initial clinic appointment.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="SHARKSGov_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+<div id="fig-smcq" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-smcq-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="SHARKSGov_files/figure-html/fig-smcq-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-smcq-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;15: Summary of Self-reported Medical Comorbidity Questionnaire at baseline by condition type
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="SHARKSGov_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+<div id="fig-eq5d" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-eq5d-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="SHARKSGov_files/figure-html/fig-eq5d-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-eq5d-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;16: Summary of EQ5D5L at baseline by condition type
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="SHARKSGov_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+<div id="fig-vr12-gen" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-vr12-gen-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="SHARKSGov_files/figure-html/fig-vr12-gen-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-vr12-gen-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;17: Summary of VR12-PCS at baseline by condition type
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="SHARKSGov_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+<div id="fig-sane-gen" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sane-gen-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="SHARKSGov_files/figure-html/fig-sane-gen-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sane-gen-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;18: Summary of SANE at baseline by condition type
+</figcaption>
 </figure>
 </div>
 </div>
@@ -1590,15 +1608,629 @@ Figure&nbsp;13: Missingness of Baseline Oxford Shoulder Instability Score by Yea
 <h2 data-number="6.2" class="anchored" data-anchor-id="knee-arthritis"><span class="header-section-number">6.2</span> Knee Arthritis</h2>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fig-oks" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-oks-ka" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-oks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="SHARKSGov_files/figure-html/fig-oks-1.png" class="img-fluid figure-img" width="672">
+<div aria-describedby="fig-oks-ka-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="SHARKSGov_files/figure-html/fig-oks-ka-1.png" class="img-fluid figure-img" width="672">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-oks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;14: Summary of OKS by Timepoint
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-oks-ka-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;19: Summary of OKS by Timepoint
 </figcaption>
 </figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="bkmpxfaluu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#bkmpxfaluu table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#bkmpxfaluu thead, #bkmpxfaluu tbody, #bkmpxfaluu tfoot, #bkmpxfaluu tr, #bkmpxfaluu td, #bkmpxfaluu th {
+  border-style: none;
+}
+
+#bkmpxfaluu p {
+  margin: 0;
+  padding: 0;
+}
+
+#bkmpxfaluu .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#bkmpxfaluu .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#bkmpxfaluu .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#bkmpxfaluu .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#bkmpxfaluu .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#bkmpxfaluu .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bkmpxfaluu .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#bkmpxfaluu .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#bkmpxfaluu .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#bkmpxfaluu .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#bkmpxfaluu .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#bkmpxfaluu .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#bkmpxfaluu .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#bkmpxfaluu .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#bkmpxfaluu .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#bkmpxfaluu .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#bkmpxfaluu .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#bkmpxfaluu .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#bkmpxfaluu .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bkmpxfaluu .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#bkmpxfaluu .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#bkmpxfaluu .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#bkmpxfaluu .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bkmpxfaluu .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#bkmpxfaluu .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#bkmpxfaluu .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bkmpxfaluu .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bkmpxfaluu .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#bkmpxfaluu .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bkmpxfaluu .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#bkmpxfaluu .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bkmpxfaluu .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bkmpxfaluu .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bkmpxfaluu .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bkmpxfaluu .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bkmpxfaluu .gt_left {
+  text-align: left;
+}
+
+#bkmpxfaluu .gt_center {
+  text-align: center;
+}
+
+#bkmpxfaluu .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#bkmpxfaluu .gt_font_normal {
+  font-weight: normal;
+}
+
+#bkmpxfaluu .gt_font_bold {
+  font-weight: bold;
+}
+
+#bkmpxfaluu .gt_font_italic {
+  font-style: italic;
+}
+
+#bkmpxfaluu .gt_super {
+  font-size: 65%;
+}
+
+#bkmpxfaluu .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#bkmpxfaluu .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#bkmpxfaluu .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#bkmpxfaluu .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#bkmpxfaluu .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#bkmpxfaluu .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#bkmpxfaluu .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#bkmpxfaluu .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#bkmpxfaluu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header gt_col_headings">
+<th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
+<th id="stat_0" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>N = 895</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">TourniquetUse</td>
+<td class="gt_row gt_center" headers="stat_0"><br>
+</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Intermittent</td>
+<td class="gt_row gt_center" headers="stat_0">19 (4.8%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Not Used</td>
+<td class="gt_row gt_center" headers="stat_0">63 (16%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Released After Closure</td>
+<td class="gt_row gt_center" headers="stat_0">43 (11%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Released Before Closure</td>
+<td class="gt_row gt_center" headers="stat_0">271 (68%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">SoftTissueReleaseMedial</td>
+<td class="gt_row gt_center" headers="stat_0"><br>
+</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Combined release/tighten</td>
+<td class="gt_row gt_center" headers="stat_0">1 (0.3%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Extensive</td>
+<td class="gt_row gt_center" headers="stat_0">28 (7.1%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Minimal</td>
+<td class="gt_row gt_center" headers="stat_0">229 (58%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;None</td>
+<td class="gt_row gt_center" headers="stat_0">134 (34%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">SoftTissueReleaseLateral</td>
+<td class="gt_row gt_center" headers="stat_0"><br>
+</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Combined release/tighten</td>
+<td class="gt_row gt_center" headers="stat_0">1 (0.3%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Extensive</td>
+<td class="gt_row gt_center" headers="stat_0">13 (3.3%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Minimal</td>
+<td class="gt_row gt_center" headers="stat_0">30 (7.7%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;None</td>
+<td class="gt_row gt_center" headers="stat_0">348 (89%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">SoftTissueReleasePosteriorCapsule</td>
+<td class="gt_row gt_center" headers="stat_0"><br>
+</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Combined release/tighten</td>
+<td class="gt_row gt_center" headers="stat_0">1 (0.3%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Extensive</td>
+<td class="gt_row gt_center" headers="stat_0">1 (0.3%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Minimal</td>
+<td class="gt_row gt_center" headers="stat_0">1 (0.3%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;None</td>
+<td class="gt_row gt_center" headers="stat_0">389 (99%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">SoftTissueReleaseAnterior</td>
+<td class="gt_row gt_center" headers="stat_0"><br>
+</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Combined release/tighten</td>
+<td class="gt_row gt_center" headers="stat_0">1 (0.3%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;None</td>
+<td class="gt_row gt_center" headers="stat_0">391 (100%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">BalanceMethod</td>
+<td class="gt_row gt_center" headers="stat_0"><br>
+</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Manual</td>
+<td class="gt_row gt_center" headers="stat_0">4 (50%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Navigation</td>
+<td class="gt_row gt_center" headers="stat_0">4 (50%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">PatellarResurfacing</td>
+<td class="gt_row gt_center" headers="stat_0">333 (81%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">AlignmentReference</td>
+<td class="gt_row gt_center" headers="stat_0"><br>
+</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;All IM</td>
+<td class="gt_row gt_center" headers="stat_0">5 (1.3%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;IM Femur/EM Tibia</td>
+<td class="gt_row gt_center" headers="stat_0">80 (20%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Navigation</td>
+<td class="gt_row gt_center" headers="stat_0">158 (40%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Other - Patient specific guides</td>
+<td class="gt_row gt_center" headers="stat_0">1 (0.3%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Robotic</td>
+<td class="gt_row gt_center" headers="stat_0">150 (38%)</td>
+</tr>
+</tbody><tfoot class="gt_footnotes">
+<tr class="even">
+<td colspan="2" class="gt_footnote"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> n (%)</td>
+</tr>
+</tfoot>
+
+</table>
+
 </div>
 </div>
 </div>
@@ -1607,22 +2239,13 @@ Figure&nbsp;14: Summary of OKS by Timepoint
 <h2 data-number="6.3" class="anchored" data-anchor-id="tibiofemoral-instability"><span class="header-section-number">6.3</span> Tibiofemoral Instability</h2>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="SHARKSGov_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-ikdc" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-ikdc-tfi" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-ikdc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="SHARKSGov_files/figure-html/fig-ikdc-1.png" class="img-fluid figure-img" width="672">
+<div aria-describedby="fig-ikdc-tfi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="SHARKSGov_files/figure-html/fig-ikdc-tfi-1.png" class="img-fluid figure-img" width="672">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ikdc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;15: Summary of OKS by Timepoint
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ikdc-tfi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;20: Summary of IKDC2000 by Timepoint
 </figcaption>
 </figure>
 </div>
@@ -1631,18 +2254,43 @@ Figure&nbsp;15: Summary of OKS by Timepoint
 </section>
 <section id="hip-arthroplasty" class="level2" data-number="6.4">
 <h2 data-number="6.4" class="anchored" data-anchor-id="hip-arthroplasty"><span class="header-section-number">6.4</span> Hip Arthroplasty</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-ohs-ha" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ohs-ha-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="SHARKSGov_files/figure-html/fig-ohs-ha-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ohs-ha-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;21: Summary of OKS by Timepoint
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
-<section id="glenohumeral-arthritis" class="level2" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="glenohumeral-arthritis"><span class="header-section-number">6.5</span> Glenohumeral Arthritis</h2>
+<section id="glenohumeral-instability" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="glenohumeral-instability"><span class="header-section-number">6.5</span> Glenohumeral Instability</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-osis-ghi" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-osis-ghi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="SHARKSGov_files/figure-html/fig-osis-ghi-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-osis-ghi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;22: Summary of OSIS by Timepoint
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
-<section id="glenohumeral-instability" class="level2" data-number="6.6">
-<h2 data-number="6.6" class="anchored" data-anchor-id="glenohumeral-instability"><span class="header-section-number">6.6</span> Glenohumeral Instability</h2>
 </section>
-<section id="rotator-cuff" class="level2" data-number="6.7">
-<h2 data-number="6.7" class="anchored" data-anchor-id="rotator-cuff"><span class="header-section-number">6.7</span> Rotator Cuff</h2>
+<section id="recommendations" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Recommendations</h1>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
