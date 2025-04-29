@@ -1441,8 +1441,7 @@ knitr::knit_print(FigureOSIS)
 Satisfaction <- Snapshot |> dplyr::select(
   RegistryCohortName,
   TreatmentSatisfaction_12months,
-  EligibleAtx12months,
-  DateRec
+  EligibleAtx12months
 ) |> dplyr::filter(
   RegistryCohortName == "KneeArthritis" | RegistryCohortName == "HipArthroplasty" | RegistryCohortName == "GHArthritis",
   EligibleAtx12months == "Yes"
