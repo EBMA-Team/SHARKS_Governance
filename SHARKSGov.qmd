@@ -1441,7 +1441,8 @@ knitr::knit_print(FigureOSIS)
 Satisfaction <- Snapshot |> dplyr::select(
   RegistryCohortName,
   TreatmentSatisfaction_12months,
-  EligibleAtx12months
+  EligibleAtx12months,
+  DateRec
 ) |> dplyr::filter(
   RegistryCohortName == "KneeArthritis" | RegistryCohortName == "HipArthroplasty" | RegistryCohortName == "GHArthritis",
   EligibleAtx12months == "Yes"
@@ -1454,4 +1455,54 @@ tbl_summary(
 
 ```
 
+The satisfaction scores were incorporated into SHARKSv2, but have not been available historically as part of the SHARKS configuration in the previous platform.
+
+# Interpretation
+
+The poor followup can be attributed to the slow rollout of automatic followup of the registry system for records created prior to the introduction of SHARKSv2 - these have been set to *inactive* to ensure thorough testing of the system. Records meeting these criteria have only been set to *active* as they have returned to clinic since the rollout. In the last week, all of these records have been sent PROMs links and reminders to enable scheduled followup.
+
+The reduction in compliance for TFInstability baseline PROMs (IKDC) is attributed to slow conversion of these cases from the *general* cohort to the *TFInstability* cohort and the cohort-specific questionnaire being missed prior to surgery.
+
+The registry database needs backfilling with regards to confirming the surgical status of records added with \>500 records in the *KneeArthritis* cohort alone needing surgery date or theatre data to be entered to provide the necessary context for interpreting PROMs collected. Overall, the registry also includes a number of records that have information indicating an attendance to an initial clinic appointment, but no confirmation that surgery has occurred.
+
 # Recommendations
+
+The following recommendations are presented for improving the data quality of the SHARKS dataset;
+
+-   Staff engage with Registry form links presented during daily lists
+
+    -   Ensure that admin forms are completed for all listed appointments in the daily consult list (green table)
+
+        -   Only fill out new entries (bottom red table) if the patient meets the inclusion criteria for the Registry
+
+    -   Ensure that *clinic assessment forms* (CAF) are completed for all active Registry records
+
+    -   Ensure all theatre forms are completed for listed surgeries meeting the inclusion criteria for Registry
+
+-   Implement actions to improve patient awareness and engagement with initial consent process
+
+-   EBMA staff attend the Department to ensure technical barriers are identified and addressed
+
+-   Increase aqssertiveness with respect to followup of existing records (even without upcoming clinic appointment)
+
+## Estimated Burden
+
+```{r}
+
+AFMedian <- median(AdminTable$`Time Taken to Complete (Seconds)`)
+
+TotalAdmin <- round((AFMedian*(InviteN + SumReturnN))/3600,1)
+
+AppointN <- as.numeric(50)
+
+ClinicN <- as.numeric(4)
+
+DailyAdmin <- round(((AFMedian*AppointN)/60)/ClinicN,1)
+
+```
+
+```{epoxy}
+
+The esimated median time to complete an admin form per appointment is {AFMedian} seconds. Per day that translates to {DailyAdmin} minutes per person when the number of appointments is estimated at {AppointN} and the number of staff involved in data collection is {ClinicN}. It should be noted that about the same amount of time is required to complete fewer (but more detailed) clinic assessment forms for each active registry record. In total, it is estimated that since the introduction of SHARKSv2 that {TotalAdmin} hours were required to complete admin forms for all appointments.
+
+```
