@@ -624,10 +624,17 @@ CurrSTROBE_AF2 <- CurrSTROBE |> dplyr::filter(
 
 *Do Department staff engage with records of new patients flagged on consult lists?*
 
+
 ```{r}
 
-NewMissed <- as.numeric(gtsummary::inline_text(Table1a, row_level = "Patient added to database", col_level = "Not Actioned"))
-NewTotal <- as.numeric(gtsummary::inline_text(Table1a, row_level = "Patient added to database", col_level = "stat_0"))
+Table1 <- gtsummary::tbl_cross( # For inline text retrieval in epoxy)
+  CurrSTROBE_AF1,
+  row = PISCFStatus1,
+  col = AdminStatus2
+)
+
+NewMissed <- as.numeric(gtsummary::inline_text(Table1, row_level = "Patient added to database", col_level = "Not Actioned"))
+NewTotal <- as.numeric(gtsummary::inline_text(Table1, row_level = "Patient added to database", col_level = "stat_0"))
 
 ClinicAdminN <- nrow(AdminTable |> dplyr::filter(
   !(TreatmentID %in% CurrSTROBE$TreatmentID),
