@@ -618,12 +618,11 @@ CurrSTROBE_AF2 <- CurrSTROBE |> dplyr::filter(
 
 *Do Department staff engage with the registry interface?*
 
-::: {fig-traffic}
-![SHARKSRegistry.com traffic Nov-Apr](Website%20Traffic%20Apr%202025.png)
+::: {#fig-traffic}
+![SHARKSRegistry.com traffic Nov 2024 - Apr 2025](Website Traffic Apr 2025.png)
 :::
 
 *Do Department staff engage with records of new patients flagged on consult lists?*
-
 
 ```{r}
 
@@ -784,6 +783,8 @@ STROBEPlotMain <- consort_plot(
  cex = 0.6
 )
 
+knitr::knit_print(STROBEPlotMain)
+
 ```
 
 ```{r}
@@ -806,6 +807,7 @@ STROBEPlot1 <- consort_plot(data = STROBEFlow3a |> dplyr::filter(Joint == "Shoul
                     cex = 0.6
 )
 
+knitr::knit_print(STROBEPlot1)
 ```
 
 ```{r}
@@ -827,6 +829,7 @@ STROBEPlot2 <- consort_plot(data = STROBEFlow3a |> dplyr::filter(Joint == "Knee"
                     allocation = "arm3",
                     cex = 0.6
 )
+knitr::knit_print(STROBEPlot2)
 
 ```
 
