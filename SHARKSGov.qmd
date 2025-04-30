@@ -626,28 +626,6 @@ CurrSTROBE_AF2 <- CurrSTROBE |> dplyr::filter(
 
 ```{r}
 
-
-Table1 <- gtsummary::tbl_cross(
-  CurrSTROBE_AF1,
-  row = PISCFStatus1,
-  col = AdminStatus2,
-  percent = "row"
-)
-
-Table1a <- gtsummary::tbl_cross( # For inline text retrieval in epoxy)
-  CurrSTROBE_AF1,
-  row = PISCFStatus1,
-  col = AdminStatus2
-)
-
-knitr::knit_print(
-  Table1
-)
-
-```
-
-```{r}
-
 NewMissed <- as.numeric(gtsummary::inline_text(Table1a, row_level = "Patient added to database", col_level = "Not Actioned"))
 NewTotal <- as.numeric(gtsummary::inline_text(Table1a, row_level = "Patient added to database", col_level = "stat_0"))
 
@@ -701,20 +679,9 @@ The rate of returned intraoperative forms is also low, with {SurgeryDataN} forms
 In addition, there are {nrow(SnapshotGen)} cases that remain in the General cohort and have not been recategorised based on clinic input.
 ```
 
-```{r}
-Table2 <- gtsummary::tbl_cross(
-  CurrSTROBE_AF2,
-  row = PISCFStatus1,
-  col = CAFStatus2,
-  percent = "row"
-)
+# Recruitment Flow by Region
 
-knitr::knit_print(
-  Table2
-)
-```
-
-# STROBE by Region
+Flowcharts as per STROBE [@Vandenbroucke2007] and RECORD [@Benchimol2015] guidelines were generated for each region (shoulder, hip, knee) enrolled into the Registry. Followup was set to eligibility at 12months.
 
 ```{r}
 
@@ -876,11 +843,10 @@ STROBEPlot3 <- consort_plot(data = STROBEFlow3a |> dplyr::filter(Joint == "Hip")
                     cex = 0.6
 )
 
-knitr::knit_print(STROBEPlotMain)
-knitr::knit_print(STROBEPlot1)
-knitr::knit_print(STROBEPlot2)
 knitr::knit_print(STROBEPlot3)
 ```
+
+Cumulative recruitment over time was plotted from Registry inception to the present.
 
 ```{r}
 #| label: fig-progress
@@ -911,7 +877,7 @@ cumulative_plot <- ggplot(RecordCount, aes(x = PatientCreationDate, y = Cumulati
     title = "Cumulative Patient Count Over Time",
     x = "Date",
     y = "Cumulative Number of Patients",
-    caption = "Data source: STROBEFlow3"
+    #caption = "Data source: STROBEFlow3"
   ) +
   # Improve the theme and formatting
   theme_minimal() +
@@ -926,6 +892,8 @@ knitr::knit_print(cumulative_plot)
 
 
 ```
+
+An acceleration can be observed in @fig-progress where SHARKSv2 was implemented at the end of 2024
 
 # Missingness and Compliance
 
@@ -949,7 +917,16 @@ gg_miss_fct(Snapshot |> dplyr::filter(
 
 ```
 
+Missingness for baseline PROMs (represented by VR12) and intraoperative data is captured in @fig-baseline-miss. Intraoperative data was captured slightly differently between cohorts in the previous system, so multiple fields have been utilised to illustrate intraoperative capture across cohorts.
+
+Overall, there are variable response rates for baseline scores across cohorts. This may reflect variable engagement during consultant clinics. The poor compliance for KneeDeformity cases reflects a potential issue for enrolling patients with KneeArthritis more broadly. Historically, emphasis has been made on enrolling total joints into the registry, however in reality KneeDeformity cases are more like other non-arthroplasty cases of KneeArthritis, which may be overlooked in clinic.
+
 ## Patient-reported Outcomes by TimePoint
+
+```{r}
+min_percent <- 10
+max_percent <- 100  # Or another value that encompasses all your data
+```
 
 ```{r}
 #| label: fig-kneearthritis-miss
@@ -981,7 +958,13 @@ PROMKA <- SnapshotKA |> dplyr::select(
 
 
 
-gg_miss_fct(PROMKA |> dplyr::select(contains("Score"), TimePoint), TimePoint)
+gg_miss_fct(PROMKA |> dplyr::select(contains("Score"), TimePoint), TimePoint) +
+  scale_fill_gradient(
+    low = "steelblue",     # Color for low missingness values
+    high = "darkred",      # Color for high missingness values
+    limits = c(min_percent, max_percent),    # Consistent scale limits
+    name = "% Missing"     # Legend title
+  )
 ```
 
 ```{r}
@@ -1014,7 +997,13 @@ PROMHA <- SnapshotHA |> dplyr::select(
 
 
 
-gg_miss_fct(PROMHA |> dplyr::select(contains("Score"), TimePoint), TimePoint)
+gg_miss_fct(PROMHA |> dplyr::select(contains("Score"), TimePoint), TimePoint) +
+  scale_fill_gradient(
+    low = "steelblue",     # Color for low missingness values
+    high = "darkred",      # Color for high missingness values
+    limits = c(min_percent, max_percent),    # Consistent scale limits
+    name = "% Missing"     # Legend title
+  )
 ```
 
 ```{r}
@@ -1053,7 +1042,13 @@ PROMTFI <- SnapshotTFI |> dplyr::select(
 
 
 
-gg_miss_fct(PROMTFI |> dplyr::select(contains("Score"), TimePoint), TimePoint)
+gg_miss_fct(PROMTFI |> dplyr::select(contains("Score"), TimePoint), TimePoint) +
+  scale_fill_gradient(
+    low = "steelblue",     # Color for low missingness values
+    high = "darkred",      # Color for high missingness values
+    limits = c(min_percent, max_percent),    # Consistent scale limits
+    name = "% Missing"     # Legend title
+  )
 ```
 
 ```{r}
@@ -1091,8 +1086,16 @@ PROMGHI <- SnapshotGHI |> dplyr::select(
 
 
 
-gg_miss_fct(PROMGHI |> dplyr::select(contains("Score"), TimePoint), TimePoint)
+gg_miss_fct(PROMGHI |> dplyr::select(contains("Score"), TimePoint), TimePoint) +
+  scale_fill_gradient(
+    low = "steelblue",     # Color for low missingness values
+    high = "darkred",      # Color for high missingness values
+    limits = c(min_percent, max_percent),    # Consistent scale limits
+    name = "% Missing"     # Legend title
+  )
 ```
+
+The cumulative results of the Registry illustrate difficulty in engaging patients beyond short term followup. The Tibiofemoral Instability cohort (@fig-tfi-miss) bucks this trend at 12months followup, largely due to previous work to this cohort using phone calls. The 9-month followup has only recently been implemented as part of SHARKSv2 and auditing rules will be adjusted in future audits to reflect varied eligibility criteria for this timepoint.
 
 ## Baseline by Year
 
@@ -1114,7 +1117,13 @@ PROMKA1 <- PROMKA |> left_join(
   OKSScore
 )
 
-gg_miss_fct(PROMKA1, CreationYear)
+gg_miss_fct(PROMKA1, CreationYear) +
+  scale_fill_gradient(
+    low = "steelblue",     # Color for low missingness values
+    high = "darkred",      # Color for high missingness values
+    limits = c(min_percent, max_percent),    # Consistent scale limits
+    name = "% Missing"     # Legend title
+  )
 
 ```
 
@@ -1137,7 +1146,13 @@ PROMHA1 <- PROMHA |> left_join(
   OHSScore
 )
 
-gg_miss_fct(PROMHA1, CreationYear)
+gg_miss_fct(PROMHA1, CreationYear) +
+  scale_fill_gradient(
+    low = "steelblue",     # Color for low missingness values
+    high = "darkred",      # Color for high missingness values
+    limits = c(min_percent, max_percent),    # Consistent scale limits
+    name = "% Missing"     # Legend title
+  )
 
 ```
 
@@ -1160,7 +1175,13 @@ PROMTFI1 <- PROMTFI |> left_join(
   IKDCScore
 )
 
-gg_miss_fct(PROMTFI1, CreationYear)
+gg_miss_fct(PROMTFI1, CreationYear) +
+  scale_fill_gradient(
+    low = "steelblue",     # Color for low missingness values
+    high = "darkred",      # Color for high missingness values
+    limits = c(min_percent, max_percent),    # Consistent scale limits
+    name = "% Missing"     # Legend title
+  )
 
 ```
 
@@ -1183,9 +1204,19 @@ PROMGHI1 <- PROMGHI |> left_join(
   OSISScore
 )
 
-gg_miss_fct(PROMGHI1, CreationYear)
+gg_miss_fct(PROMGHI1, CreationYear) +
+  scale_fill_gradient(
+    low = "steelblue",     # Color for low missingness values
+    high = "darkred",      # Color for high missingness values
+    limits = c(min_percent, max_percent),    # Consistent scale limits
+    name = "% Missing"     # Legend title
+  )
 
 ```
+
+The introduction of SHARKSv2 has begun to improve the baseline capture of cohort-specific scores in the *KneeArthritis* cohort (@fig-ka-missbase), as well as the *HipArthroplasty* (@fig-ha-missbase)and *GHInstability* (@fig-ghi-missbase) cohorts. However, because the system now separates the questionnaires between the *General* pack that patients receive prior to their initial clinic appointment and the cohort-specific questionnaire (e.g. IKDC), the short turnaround for *TFInstability* surgeries is degrading the capture rate for baseline IKDC in this cohort. This is illustrated by the increased missingness in baseline IKDC (@fig-tfi-missbase). It is speculated that Knee Stabilisation cases appearing on the theatre list are being recategorised in the correct cohort too late for PROMs capture.
+
+In the new system, patients receiving a surgery booking will need to be reminded that they will receive an additional questionnaire that is more specific to their condition prior to their surgery.
 
 # Cohort Analysis
 
@@ -1215,6 +1246,8 @@ FigureVR12MCS <- Snapshot |> dplyr::filter(RegistryCohortName != "KneeDeformity"
 
 knitr::knit_print(FigureVR12MCS)
 ```
+
+Between-cohort variability is observed for the Physical Component Score of the VR12, but not as pronounced for the Mental Component Score. Most notable is the high variation within all cohorts for both VR12 component scores.
 
 ## General
 
@@ -1277,41 +1310,43 @@ knitr::knit_print(FigureSANE)
 
 ```
 
+The *General* cohort captures broad health questionnaires at the point of Registry enrolment and these show some differences between patient-identified conditions. The evaluation of joint function (SANE) shows high variability, regardless of the condition type.
+
 ## Knee Arthritis
 
 ```{r}
 #| label: fig-oks-ka
 #| fig-cap: "Summary of OKS by Timepoint"
 
+preop_position <- which(levels(PROMKA$TimePoint) == "Preop")
+
 FigureOKS <- PROMKA |>
   ggplot(aes(y = OKSScore, x = TimePoint)) +
-  stat_halfeye() + 
-   # Add a red ellipse to highlight scores above 42 at Preop
-  ggforce::geom_ellipse(aes(x0 = which(levels(PROMKA$TimePoint) == "Preop"), 
-                    y0 = 45, 
+  stat_halfeye(na.rm = TRUE) + 
+  ggforce::geom_ellipse(aes(x0 = preop_position, 
+                    y0 = 42, 
                     a = 0.3, 
                     b = 5, 
                     angle = 0),
                color = "red", 
                size = 1.2,
                inherit.aes = FALSE) +
-  # Add an annotation label
   annotate("text", 
-           x = which(levels(PROMKA$TimePoint) == "Preop") + 0.4, 
+           x = preop_position + 0.4, 
            y = 48,
            label = "High preop scores",
            color = "red",
            fontface = "bold",
            size = 3.5) +
-  # Improve the overall appearance
   theme_minimal()
-
 
 knitr::knit_print(FigureOKS)
 
 ```
 
 ```{r}
+#| label: tbl-ka-intraop
+#| tbl-cap: "Summary of intraoperative variables in Knee Arthritis cohort"
 
 TableKAsurg <- gtsummary::tbl_summary(
   Snapshot |> dplyr::filter(
@@ -1330,17 +1365,21 @@ knitr::knit_print(TableKAsurg)
 
 ```
 
+Assessment of the *KneeArthritis* cohort reveals that some patients enrolled in the cohort are scoring high on the Oxford Knee Score and that intraoperative data requires backfilling and that there may be sufficient variation in surgical technique to warrant further investigation (e.g. patellar resurfacing, tourniquet use, soft tissue management).
+
 ## Tibiofemoral Instability
 
 ```{r}
 #| label: fig-ikdc-tfi
 #| fig-cap: "Summary of IKDC2000 by Timepoint"
 
+preop_position <- which(levels(PROMTFI$TimePoint) == "Preop")
+
 FigureIKDC <- PROMTFI |>
   ggplot(aes(y = IKDCScore, x = TimePoint)) +
-  stat_halfeye() + 
+  stat_halfeye(na.rm = TRUE) + 
    # Add a red ellipse to highlight scores above 42 at Preop
-  ggforce::geom_ellipse(aes(x0 = which(levels(PROMTFI$TimePoint) == "Preop"), 
+  ggforce::geom_ellipse(aes(x0 = preop_position, 
                     y0 = 80, 
                     a = 0.3, 
                     b = 5, 
@@ -1350,7 +1389,7 @@ FigureIKDC <- PROMTFI |>
                inherit.aes = FALSE) +
   # Add an annotation label
   annotate("text", 
-           x = which(levels(PROMTFI$TimePoint) == "Preop") + 0.4, 
+           x = preop_position + 0.4, 
            y = 90,
            label = "High preop scores",
            color = "red",
@@ -1364,6 +1403,8 @@ knitr::knit_print(FigureIKDC)
 
 ```
 
+Overall, the *TFInstability* cohort mean IKDC score does not reach the reported patient acceptable symptom state (\~ 80) on average at up to 2 years followup. Considering, the missingness patterns in the data, this could be attributed to patients self-selecting into responding to PROMs or the patients returning to clinic historically to fill in scores have been those having problems after surgery.
+
 ## Hip Arthroplasty
 
 ```{r}
@@ -1372,24 +1413,7 @@ knitr::knit_print(FigureIKDC)
 
 FigureOHS <- PROMHA |>
   ggplot(aes(y = OHSScore, x = TimePoint)) +
-  stat_halfeye() + 
-   # Add a red ellipse to highlight scores above 42 at Preop
-  ggforce::geom_ellipse(aes(x0 = which(levels(PROMHA$TimePoint) == "Preop"), 
-                    y0 = 45, 
-                    a = 0.3, 
-                    b = 5, 
-                    angle = 0),
-               color = "red", 
-               size = 1.2,
-               inherit.aes = FALSE) +
-  # Add an annotation label
-  annotate("text", 
-           x = which(levels(PROMHA$TimePoint) == "Preop") + 0.4, 
-           y = 48,
-           label = "High preop scores",
-           color = "red",
-           fontface = "bold",
-           size = 3.5) +
+  stat_halfeye()  +
   # Improve the overall appearance
   theme_minimal()
 
@@ -1404,12 +1428,14 @@ knitr::knit_print(FigureOHS)
 #| label: fig-osis-ghi
 #| fig-cap: "Summary of OSIS by Timepoint"
 
+preop_position <- which(levels(PROMGHI$TimePoint) == "Preop")
+
 FigureOSIS <- PROMGHI |>
   ggplot(aes(y = OSISScore, x = TimePoint)) +
   stat_halfeye() + 
    # Add a red ellipse to highlight scores above 42 at Preop
   ggforce::geom_ellipse(aes(x0 = which(levels(PROMGHI$TimePoint) == "Preop"), 
-                    y0 = 45, 
+                    y0 = 42, 
                     a = 0.3, 
                     b = 5, 
                     angle = 0),
@@ -1458,7 +1484,7 @@ The satisfaction scores were incorporated into SHARKSv2, but have not been avail
 
 # Interpretation
 
-The poor followup can be attributed to the slow rollout of automatic followup of the registry system for records created prior to the introduction of SHARKSv2 - these have been set to *inactive* to ensure thorough testing of the system. Records meeting these criteria have only been set to *active* as they have returned to clinic since the rollout. In the last week, all of these records have been sent PROMs links and reminders to enable scheduled followup.
+The poor followup can be attributed to the slow rollout of automatic followup of the registry system for records created prior to the introduction of SHARKSv2 - these have been set to *inactive* to ensure thorough testing of the system prior to contacting patients that have not been engaged with the hospital for some years. Records meeting these criteria have only been set to *active* as they have returned to clinic since the rollout. In the last week, all of these records have been sent PROMs links and reminders to enable scheduled followup.
 
 The reduction in compliance for TFInstability baseline PROMs (IKDC) is attributed to slow conversion of these cases from the *general* cohort to the *TFInstability* cohort and the cohort-specific questionnaire being missed prior to surgery.
 
