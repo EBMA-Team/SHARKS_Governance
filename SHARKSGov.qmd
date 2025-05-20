@@ -619,7 +619,7 @@ CurrSTROBE_AF2 <- CurrSTROBE |> dplyr::filter(
 *Do Department staff engage with the registry interface?*
 
 ::: {#fig-traffic}
-![SHARKSRegistry.com traffic Nov 2024 - Apr 2025](Website Traffic Apr 2025.png)
+![SHARKSRegistry.com traffic Nov 2024 - Apr 2025](Website%20Traffic%20Apr%202025.png)
 :::
 
 *Do Department staff engage with records of new patients flagged on consult lists?*
