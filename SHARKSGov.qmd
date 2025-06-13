@@ -1413,7 +1413,53 @@ knitr::knit_print(FigureIKDC)
 
 ```
 
-Overall, the *TFInstability* cohort mean IKDC score does not reach the reported patient acceptable symptom state (\~ 80) on average at up to 2 years followup. Considering, the missingness patterns in the data, this could be attributed to patients self-selecting into responding to PROMs or the patients returning to clinic historically to fill in scores have been those having problems after surgery.
+Overall, the *TFInstability* cohort mean IKDC score does not reach the reported patient acceptable symptom state (\~ 80) on average at up to 2 years followup. Considering the missingness patterns in the data, this could be attributed to patients self-selecting into responding to PROMs or the patients returning to clinic historically to fill in scores have been those having problems after surgery.
+
+```{r}
+
+IKDCBase <- dplyr::summarise(
+SnapshotTFI |> dplyr::filter(
+  !is.na(IKDCScore_Preop)
+) ,
+(mean = mean(as.numeric(IKDCScore_Preop))
+ )
+)
+
+```
+
+```{epoxy}
+
+The baseline IKDC for ACL injury patients is {round(IKDCBase,2)}.
+
+
+```
+
+```{r}
+
+tblIKDCBase <- tbl_summary(
+  SnapshotTFI |> dplyr::mutate(
+  IKDCBase = as.numeric(IKDCScore_Preop)
+) |> dplyr::filter(
+  Sex == "Male" | Sex == "Female"
+  ) |> select(
+    IKDCBase,
+    Sex,
+    AgeAtInitialExam
+  ),
+  by = Sex,
+statistic = list(
+  all_continuous() ~ "{mean} ({sd})"
+),
+digits = list(
+  IKDCBase = c(1, 1),
+  AgeAtInitialExam = c(1, 1)
+  ),
+missing = "ifany"
+) |> add_overall()
+
+knitr::knit_print(tblIKDCBase)
+
+```
 
 ## Hip Arthroplasty
 
