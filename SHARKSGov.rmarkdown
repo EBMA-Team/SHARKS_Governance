@@ -25,11 +25,13 @@ execute:
   message: false
 ---
 
+
 # Preamble
 
 The following analysis is a report on the activity, quality and data contained in the SHARKS registry \[wiki\]
 
 Analysis packages were loaded initially into the *R* environment.
+
 
 ```{r, load-pkgs}
 
@@ -75,7 +77,9 @@ pacman::p_load(# Load required packages
   
 ```
 
+
 Access to the SHARKS datasets was pre-authorised.
+
 
 ```{r}
 #| label: auth2
@@ -92,7 +96,9 @@ googledrive::drive_auth(
   )
 ```
 
+
 A function was generated to retrieve files using the *googledrive* package, to call on later in the analysis for processing data imports.
+
 
 ```{r}
 
@@ -136,7 +142,9 @@ get_specific_snapshot <- function(folder_name, base_folder_id = base_folder_id1)
 }
 ```
 
+
 Data was retrieved from live database tables. Source files were specified and stored as global variables to call on in further functions.
+
 
 ```{r}
 #| label: live-table
@@ -419,7 +427,9 @@ ACAF <- googlesheets4::range_read(
 
 ```
 
+
 A static registry snapshot was retrieved and formatted based on the fixed date of preparation of the snapshot (30-Jun-2025).
+
 
 ```{r}
 
@@ -468,6 +478,7 @@ STROBEInput <- openxlsx2::wb_to_df(
 
 ```
 
+
 # Context
 
 Engagement to design and implement a department registry at QEII Hospital commenced in 2016 as a private-public partnership between the Department and EBM Analytics. The registry launched as a single-surgeon pilot in July 2017 within the Department of Orthopaedics, with Chris Bell as the Principal Investigator. At commencement, a series of shoulder and knee cohorts were designed and implemented that reflected the practice of the project PI. In brief, the recruitment and data collection processes were based largely on paper (initial consent and questionnaire pack) and followup scores completed by paper or, in a minority of cases, electronic capture through web-based forms.
@@ -485,6 +496,7 @@ Version 2 of the SHARKS registry moved all recruitment and data collection proce
 # Engagement
 
 The current iteration of the SHARKS registry commenced in August 2024.
+
 
 ```{r}
 
@@ -581,7 +593,9 @@ PISCFPerc <- round((PISCFN/ScreenInN)*100,1)
 
 ```
 
+
 *Do patients engage with attempts to recruit them prior to initial clinic consults?*
+
 
 ```{epoxy}
 
@@ -616,6 +630,7 @@ CurrSTROBE_AF2 <- CurrSTROBE |> dplyr::filter(
 
 ```
 
+
 *Do Department staff engage with the registry interface?*
 
 ::: {#fig-traffic}
@@ -623,6 +638,7 @@ CurrSTROBE_AF2 <- CurrSTROBE |> dplyr::filter(
 :::
 
 *Do Department staff engage with records of new patients flagged on consult lists?*
+
 
 ```{r}
 
@@ -685,9 +701,11 @@ The rate of returned intraoperative forms is also low, with {SurgeryDataN} forms
 In addition, there are {nrow(SnapshotGen)} cases that remain in the General cohort and have not been recategorised based on clinic input.
 ```
 
+
 # Recruitment Flow by Region
 
 Flowcharts as per STROBE [@Vandenbroucke2007] and RECORD [@Benchimol2015] guidelines were generated for each region (shoulder, hip, knee) enrolled into the Registry. Followup was set to eligibility at 12months.
+
 
 ```{r}
 
@@ -856,7 +874,9 @@ STROBEPlot3 <- consort_plot(data = STROBEFlow3a |> dplyr::filter(Joint == "Hip")
 knitr::knit_print(STROBEPlot3)
 ```
 
+
 Cumulative recruitment over time was plotted from Registry inception to the present.
+
 
 ```{r}
 #| label: fig-progress
@@ -903,11 +923,13 @@ knitr::knit_print(cumulative_plot)
 
 ```
 
+
 An acceleration can be observed in @fig-progress where SHARKSv2 was implemented at the end of 2024
 
 # Missingness and Compliance
 
 ## Baseline and Intraoperative
+
 
 ```{r}
 #| label: fig-baseline-miss
@@ -927,11 +949,13 @@ gg_miss_fct(Snapshot |> dplyr::filter(
 
 ```
 
+
 Missingness for baseline PROMs (represented by VR12) and intraoperative data is captured in @fig-baseline-miss. Intraoperative data was captured slightly differently between cohorts in the previous system, so multiple fields have been utilised to illustrate intraoperative capture across cohorts.
 
 Overall, there are variable response rates for baseline scores across cohorts. This may reflect variable engagement during consultant clinics. The poor compliance for KneeDeformity cases reflects a potential issue for enrolling patients with KneeArthritis more broadly. Historically, emphasis has been made on enrolling total joints into the registry, however in reality KneeDeformity cases are more like other non-arthroplasty cases of KneeArthritis, which may be overlooked in clinic.
 
 ## Patient-reported Outcomes by TimePoint
+
 
 ```{r}
 min_percent <- 10
@@ -1105,9 +1129,11 @@ gg_miss_fct(PROMGHI |> dplyr::select(contains("Score"), TimePoint), TimePoint) +
   )
 ```
 
+
 The cumulative results of the Registry illustrate difficulty in engaging patients beyond short term followup. The Tibiofemoral Instability cohort (@fig-tfi-miss) bucks this trend at 12months followup, largely due to previous work to this cohort using phone calls. The 9-month followup has only recently been implemented as part of SHARKSv2 and auditing rules will be adjusted in future audits to reflect varied eligibility criteria for this timepoint.
 
 ## Baseline by Year
+
 
 ```{r}
 #| label: fig-ka-missbase
@@ -1224,6 +1250,7 @@ gg_miss_fct(PROMGHI1, CreationYear) +
 
 ```
 
+
 The introduction of SHARKSv2 has begun to improve the baseline capture of cohort-specific scores in the *KneeArthritis* cohort (@fig-ka-missbase), as well as the *HipArthroplasty* (@fig-ha-missbase)and *GHInstability* (@fig-ghi-missbase) cohorts. However, because the system now separates the questionnaires between the *General* pack that patients receive prior to their initial clinic appointment and the cohort-specific questionnaire (e.g. IKDC), the short turnaround for *TFInstability* surgeries is degrading the capture rate for baseline IKDC in this cohort. This is illustrated by the increased missingness in baseline IKDC (@fig-tfi-missbase). It is speculated that Knee Stabilisation cases appearing on the theatre list are being recategorised in the correct cohort too late for PROMs capture.
 
 In the new system, patients receiving a surgery booking will need to be reminded that they will receive an additional questionnaire that is more specific to their condition prior to their surgery.
@@ -1231,6 +1258,7 @@ In the new system, patients receiving a surgery booking will need to be reminded
 # Cohort Analysis
 
 The VR12 is a *general* health questionnaire that is presented to *all* patients enrolled in the registry.
+
 
 ```{r}
 #| label: fig-vr12pcs-cohort
@@ -1257,11 +1285,13 @@ FigureVR12MCS <- Snapshot |> dplyr::filter(RegistryCohortName != "KneeDeformity"
 knitr::knit_print(FigureVR12MCS)
 ```
 
+
 Between-cohort variability is observed for the Physical Component Score of the VR12, but not as pronounced for the Mental Component Score. Most notable is the high variation within all cohorts for both VR12 component scores.
 
 ## General
 
 The general cohort is a label for all patients entering into the registry through the invitation link sent prior to their initial clinic appointment.
+
 
 ```{r}
 #| label: fig-smcq
@@ -1320,9 +1350,11 @@ knitr::knit_print(FigureSANE)
 
 ```
 
+
 The *General* cohort captures broad health questionnaires at the point of Registry enrolment and these show some differences between patient-identified conditions. The evaluation of joint function (SANE) shows high variability, regardless of the condition type.
 
 ## Knee Arthritis
+
 
 ```{r}
 #| label: fig-oks-ka
@@ -1375,9 +1407,11 @@ knitr::knit_print(TableKAsurg)
 
 ```
 
+
 Assessment of the *KneeArthritis* cohort reveals that some patients enrolled in the cohort are scoring high on the Oxford Knee Score and that intraoperative data requires backfilling and that there may be sufficient variation in surgical technique to warrant further investigation (e.g. patellar resurfacing, tourniquet use, soft tissue management).
 
 ## Tibiofemoral Instability
+
 
 ```{r}
 #| label: fig-ikdc-tfi
@@ -1413,7 +1447,9 @@ knitr::knit_print(FigureIKDC)
 
 ```
 
+
 Overall, the *TFInstability* cohort mean IKDC score does not reach the reported patient acceptable symptom state (\~ 80) on average at up to 2 years followup. Considering the missingness patterns in the data, this could be attributed to patients self-selecting into responding to PROMs or the patients returning to clinic historically to fill in scores have been those having problems after surgery.
+
 
 ```{r}
 
@@ -1461,7 +1497,9 @@ knitr::knit_print(tblIKDCBase)
 
 ```
 
+
 ## Hip Arthroplasty
+
 
 ```{r}
 #| label: fig-ohs-ha
@@ -1478,7 +1516,9 @@ knitr::knit_print(FigureOHS)
 
 ```
 
+
 ## Glenohumeral Instability
+
 
 ```{r}
 #| label: fig-osis-ghi
@@ -1514,7 +1554,9 @@ knitr::knit_print(FigureOSIS)
 
 ```
 
+
 ## Satisfaction
+
 
 ```{r}
 #| label: tbl-satisfaction
@@ -1535,6 +1577,7 @@ tbl_summary(
 )
 
 ```
+
 
 The satisfaction scores were incorporated into SHARKSv2, but have not been available historically as part of the SHARKS configuration in the previous platform.
 
@@ -1568,6 +1611,7 @@ The following recommendations are presented for improving the data quality of th
 
 ## Estimated Burden
 
+
 ```{r}
 
 AFMedian <- median(AdminTable$`Time Taken to Complete (Seconds)`)
@@ -1587,3 +1631,4 @@ DailyAdmin <- round(((AFMedian*AppointN)/60)/ClinicN,1)
 The esimated median time to complete an admin form per appointment is {AFMedian} seconds. Per day that translates to {DailyAdmin} minutes per person when the number of appointments is estimated at {AppointN} and the number of staff involved in data collection is {ClinicN}. It should be noted that about the same amount of time is required to complete fewer (but more detailed) clinic assessment forms for each active registry record. In total, it is estimated that since the introduction of SHARKSv2 that {TotalAdmin} hours were required to complete admin forms for all appointments.
 
 ```
+
