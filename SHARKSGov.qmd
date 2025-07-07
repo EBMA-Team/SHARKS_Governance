@@ -619,7 +619,9 @@ CurrSTROBE_AF2 <- CurrSTROBE |> dplyr::filter(
 *Do Department staff engage with the registry interface?*
 
 ::: {#fig-traffic}
-![SHARKSRegistry.com traffic Nov 2024 - Apr 2025](Website%20Traffic%20Apr%202025.png)
+![](Website%20Traffic%20Apr%202025.png)
+
+SHARKSRegistry.com traffic Nov 2024 - Jun 2025
 :::
 
 *Do Department staff engage with records of new patients flagged on consult lists?*
@@ -1465,7 +1467,7 @@ knitr::knit_print(tblIKDCBase)
 
 ```{r}
 #| label: fig-ohs-ha
-#| fig-cap: "Summary of OKS by Timepoint"
+#| fig-cap: "Summary of OHS by Timepoint"
 
 FigureOHS <- PROMHA |>
   ggplot(aes(y = OHSScore, x = TimePoint)) +
