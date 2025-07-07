@@ -4,7 +4,7 @@
     "href": "SHARKSGov.html",
     "title": "SHARKS_Governance",
     "section": "",
-    "text": "The following analysis is a report on the activity, quality and data contained in the SHARKS registry [wiki]\nAnalysis packages were loaded initially into the R environment.\nAccess to the SHARKS datasets was pre-authorised.\nA function was generated to retrieve files using the googledrive package, to call on later in the analysis for processing data imports.\nData was retrieved from live database tables. Source files were specified and stored as global variables to call on in further functions.\nA static registry snapshot was retrieved and formatted based on the fixed date of preparation of the snapshot (31-Mar-2025)."
+    "text": "The following analysis is a report on the activity, quality and data contained in the SHARKS registry [wiki]\nAnalysis packages were loaded initially into the R environment.\nAccess to the SHARKS datasets was pre-authorised.\nA function was generated to retrieve files using the googledrive package, to call on later in the analysis for processing data imports.\nData was retrieved from live database tables. Source files were specified and stored as global variables to call on in further functions.\nA static registry snapshot was retrieved and formatted based on the fixed date of preparation of the snapshot (30-Jun-2025)."
   },
   {
     "objectID": "SHARKSGov.html#preparation",
@@ -39,28 +39,28 @@
     "href": "SHARKSGov.html#general",
     "title": "SHARKS_Governance",
     "section": "6.1 General",
-    "text": "6.1 General\nThe general cohort is a label for all patients entering into the registry through the invitation link sent prior to their initial clinic appointment.\n\n\n\n\n\n\n\n\nFigure 15: Summary of Self-reported Medical Comorbidity Questionnaire at baseline by condition type\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 16: Summary of EQ5D5L at baseline by condition type\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 17: Summary of VR12-PCS at baseline by condition type\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 18: Summary of SANE at baseline by condition type"
+    "text": "6.1 General\nThe general cohort is a label for all patients entering into the registry through the invitation link sent prior to their initial clinic appointment.\n\n\n\n\n\n\n\n\nFigure 18: Summary of Self-reported Medical Comorbidity Questionnaire at baseline by condition type\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 19: Summary of EQ5D5L at baseline by condition type\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 20: Summary of VR12-PCS at baseline by condition type\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 21: Summary of SANE at baseline by condition type\n\n\n\n\n\nThe General cohort captures broad health questionnaires at the point of Registry enrolment and these show some differences between patient-identified conditions. The evaluation of joint function (SANE) shows high variability, regardless of the condition type."
   },
   {
     "objectID": "SHARKSGov.html#knee-arthritis",
     "href": "SHARKSGov.html#knee-arthritis",
     "title": "SHARKS_Governance",
     "section": "6.2 Knee Arthritis",
-    "text": "6.2 Knee Arthritis\n\n\n\n\n\n\n\n\nFigure 19: Summary of OKS by Timepoint\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nN = 8951\n\n\n\n\nTourniquetUse\n\n\n\n\n    Intermittent\n19 (4.8%)\n\n\n    Not Used\n63 (16%)\n\n\n    Released After Closure\n43 (11%)\n\n\n    Released Before Closure\n271 (68%)\n\n\nSoftTissueReleaseMedial\n\n\n\n\n    Combined release/tighten\n1 (0.3%)\n\n\n    Extensive\n28 (7.1%)\n\n\n    Minimal\n229 (58%)\n\n\n    None\n134 (34%)\n\n\nSoftTissueReleaseLateral\n\n\n\n\n    Combined release/tighten\n1 (0.3%)\n\n\n    Extensive\n13 (3.3%)\n\n\n    Minimal\n30 (7.7%)\n\n\n    None\n348 (89%)\n\n\nSoftTissueReleasePosteriorCapsule\n\n\n\n\n    Combined release/tighten\n1 (0.3%)\n\n\n    Extensive\n1 (0.3%)\n\n\n    Minimal\n1 (0.3%)\n\n\n    None\n389 (99%)\n\n\nSoftTissueReleaseAnterior\n\n\n\n\n    Combined release/tighten\n1 (0.3%)\n\n\n    None\n391 (100%)\n\n\nBalanceMethod\n\n\n\n\n    Manual\n4 (50%)\n\n\n    Navigation\n4 (50%)\n\n\nPatellarResurfacing\n333 (81%)\n\n\nAlignmentReference\n\n\n\n\n    All IM\n5 (1.3%)\n\n\n    IM Femur/EM Tibia\n80 (20%)\n\n\n    Navigation\n158 (40%)\n\n\n    Other - Patient specific guides\n1 (0.3%)\n\n\n    Robotic\n150 (38%)\n\n\n\n1 n (%)"
+    "text": "6.2 Knee Arthritis\n\n\n\n\n\n\n\n\nFigure 22: Summary of OKS by Timepoint\n\n\n\n\n\n\n\n\n\nTable 1: Summary of intraoperative variables in Knee Arthritis cohort\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nN = 9321\n\n\n\n\nTourniquetUse\n\n\n\n\n    Intermittent\n21 (4.9%)\n\n\n    Not Used\n64 (15%)\n\n\n    Released After Closure\n45 (11%)\n\n\n    Released Before Closure\n295 (69%)\n\n\nSoftTissueReleaseMedial\n\n\n\n\n    Combined release/tighten\n1 (0.2%)\n\n\n    Extensive\n28 (6.7%)\n\n\n    Minimal\n252 (60%)\n\n\n    None\n140 (33%)\n\n\nSoftTissueReleaseLateral\n\n\n\n\n    Combined release/tighten\n1 (0.2%)\n\n\n    Extensive\n14 (3.3%)\n\n\n    Minimal\n51 (12%)\n\n\n    None\n355 (84%)\n\n\nSoftTissueReleasePosteriorCapsule\n\n\n\n\n    Combined release/tighten\n1 (0.2%)\n\n\n    Extensive\n1 (0.2%)\n\n\n    Minimal\n17 (4.0%)\n\n\n    None\n402 (95%)\n\n\nSoftTissueReleaseAnterior\n\n\n\n\n    Combined release/tighten\n1 (0.2%)\n\n\n    Minimal\n16 (3.8%)\n\n\n    None\n404 (96%)\n\n\nBalanceMethod\n\n\n\n\n    Manual\n26 (68%)\n\n\n    Navigation\n6 (16%)\n\n\n    None\n4 (11%)\n\n\n    Robotic\n2 (5.3%)\n\n\nPatellarResurfacing\n360 (82%)\n\n\nAlignmentReference\n\n\n\n\n    All IM\n5 (1.2%)\n\n\n    IM Femur/EM Tibia\n104 (25%)\n\n\n    Navigation\n160 (38%)\n\n\n    Other - Patient specific guides\n1 (0.2%)\n\n\n    Robotic\n153 (36%)\n\n\n\n1 n (%)\n\n\n\n\n\n\n\n\n\n\n\nAssessment of the KneeArthritis cohort reveals that some patients enrolled in the cohort are scoring high on the Oxford Knee Score and that intraoperative data requires backfilling and that there may be sufficient variation in surgical technique to warrant further investigation (e.g. patellar resurfacing, tourniquet use, soft tissue management)."
   },
   {
     "objectID": "SHARKSGov.html#tibiofemoral-instability",
     "href": "SHARKSGov.html#tibiofemoral-instability",
     "title": "SHARKS_Governance",
     "section": "6.3 Tibiofemoral Instability",
-    "text": "6.3 Tibiofemoral Instability\n\n\n\n\n\n\n\n\nFigure 20: Summary of IKDC2000 by Timepoint"
+    "text": "6.3 Tibiofemoral Instability\n\n\n\n\n\n\n\n\nFigure 23: Summary of IKDC2000 by Timepoint\n\n\n\n\n\nOverall, the TFInstability cohort mean IKDC score does not reach the reported patient acceptable symptom state (~ 80) on average at up to 2 years followup. Considering the missingness patterns in the data, this could be attributed to patients self-selecting into responding to PROMs or the patients returning to clinic historically to fill in scores have been those having problems after surgery.\n\nThe baseline IKDC for ACL injury patients is 47.43.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nOverall\nN = 5281\nFemale\nN = 1661\nMale\nN = 3621\n\n\n\n\nIKDCBase\n47.4 (12.6)\n47.1 (12.9)\n47.5 (12.4)\n\n\n    Unknown\n257\n74\n183\n\n\nAgeAtInitialExam\n27.3 (7.9)\n27.0 (7.6)\n27.5 (8.0)\n\n\n    Unknown\n217\n58\n159\n\n\n\n1 Mean (SD)"
   },
   {
     "objectID": "SHARKSGov.html#hip-arthroplasty",
     "href": "SHARKSGov.html#hip-arthroplasty",
     "title": "SHARKS_Governance",
     "section": "6.4 Hip Arthroplasty",
-    "text": "6.4 Hip Arthroplasty\n\n\n\n\n\n\n\n\nFigure 21: Summary of OKS by Timepoint"
+    "text": "6.4 Hip Arthroplasty\n\n\n\n\n\n\n\n\nFigure 24: Summary of OKS by Timepoint"
   },
   {
     "objectID": "SHARKSGov.html#glenohumeral-arthritis",
@@ -74,7 +74,7 @@
     "href": "SHARKSGov.html#glenohumeral-instability",
     "title": "SHARKS_Governance",
     "section": "6.5 Glenohumeral Instability",
-    "text": "6.5 Glenohumeral Instability\n\n\n\n\n\n\n\n\nFigure 22: Summary of OSIS by Timepoint"
+    "text": "6.5 Glenohumeral Instability\n\n\n\n\n\n\n\n\nFigure 25: Summary of OSIS by Timepoint"
   },
   {
     "objectID": "SHARKSGov.html#rotator-cuff",
@@ -95,20 +95,34 @@
     "href": "SHARKSGov.html#baseline-and-intraoperative",
     "title": "SHARKS_Governance",
     "section": "5.1 Baseline and Intraoperative",
-    "text": "5.1 Baseline and Intraoperative\n\n\n\n\n\n\n\n\nFigure 6: Missingness of baseline PROMs and intraoperative date by registry cohort"
+    "text": "5.1 Baseline and Intraoperative\n\n\n\n\n\n\n\n\nFigure 7: Missingness of baseline PROMs and intraoperative date by registry cohort\n\n\n\n\n\nMissingness for baseline PROMs (represented by VR12) and intraoperative data is captured in Figure 7. Intraoperative data was captured slightly differently between cohorts in the previous system, so multiple fields have been utilised to illustrate intraoperative capture across cohorts.\nOverall, there are variable response rates for baseline scores across cohorts. This may reflect variable engagement during consultant clinics. The poor compliance for KneeDeformity cases reflects a potential issue for enrolling patients with KneeArthritis more broadly. Historically, emphasis has been made on enrolling total joints into the registry, however in reality KneeDeformity cases are more like other non-arthroplasty cases of KneeArthritis, which may be overlooked in clinic."
   },
   {
     "objectID": "SHARKSGov.html#patient-reported-outcomes-by-timepoint",
     "href": "SHARKSGov.html#patient-reported-outcomes-by-timepoint",
     "title": "SHARKS_Governance",
     "section": "5.2 Patient-reported Outcomes by TimePoint",
-    "text": "5.2 Patient-reported Outcomes by TimePoint\n\n\n\n\n\n\n\n\nFigure 7: Missingness of Oxford Knee Score by Timepoint in the Knee Arthritis cohort\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 8: Missingness of Oxford Hip Score by Timepoint in the Hip Arthroplasty cohort\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 9: Missingness of IKDC2000 Score by Timepoint in the Tibiofemoral Instability cohort\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 10: Missingness of Oxford Shoulder Instability Score by Timepoint in the Glenohumeral Instability cohort"
+    "text": "5.2 Patient-reported Outcomes by TimePoint\n\n\n\n\n\n\n\n\nFigure 8: Missingness of Oxford Knee Score by Timepoint in the Knee Arthritis cohort\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 9: Missingness of Oxford Hip Score by Timepoint in the Hip Arthroplasty cohort\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 10: Missingness of IKDC2000 Score by Timepoint in the Tibiofemoral Instability cohort\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 11: Missingness of Oxford Shoulder Instability Score by Timepoint in the Glenohumeral Instability cohort\n\n\n\n\n\nThe cumulative results of the Registry illustrate difficulty in engaging patients beyond short term followup. The Tibiofemoral Instability cohort (Figure 10) bucks this trend at 12months followup, largely due to previous work to this cohort using phone calls. The 9-month followup has only recently been implemented as part of SHARKSv2 and auditing rules will be adjusted in future audits to reflect varied eligibility criteria for this timepoint."
   },
   {
     "objectID": "SHARKSGov.html#baseline-by-year",
     "href": "SHARKSGov.html#baseline-by-year",
     "title": "SHARKS_Governance",
     "section": "5.3 Baseline by Year",
-    "text": "5.3 Baseline by Year\n\n\n\n\n\n\n\n\nFigure 11: Missingness of Baseline Oxford Knee Score by Year in the Knee Arthritis cohort\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 12: Missingness of Baseline Oxford Hip Score by Year in the Hip Arthroplasty cohort\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 13: Missingness of Baseline IKDC2000 by Year in the Tibiofemoral Instability cohort\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 14: Missingness of Baseline Oxford Shoulder Instability Score by Year in the Glenohumeral Instability cohort"
+    "text": "5.3 Baseline by Year\n\n\n\n\n\n\n\n\nFigure 12: Missingness of Baseline Oxford Knee Score by Year in the Knee Arthritis cohort\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 13: Missingness of Baseline Oxford Hip Score by Year in the Hip Arthroplasty cohort\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 14: Missingness of Baseline IKDC2000 by Year in the Tibiofemoral Instability cohort\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 15: Missingness of Baseline Oxford Shoulder Instability Score by Year in the Glenohumeral Instability cohort\n\n\n\n\n\nThe introduction of SHARKSv2 has begun to improve the baseline capture of cohort-specific scores in the KneeArthritis cohort (Figure 12), as well as the HipArthroplasty (Figure 13)and GHInstability (Figure 15) cohorts. However, because the system now separates the questionnaires between the General pack that patients receive prior to their initial clinic appointment and the cohort-specific questionnaire (e.g. IKDC), the short turnaround for TFInstability surgeries is degrading the capture rate for baseline IKDC in this cohort. This is illustrated by the increased missingness in baseline IKDC (Figure 14). It is speculated that Knee Stabilisation cases appearing on the theatre list are being recategorised in the correct cohort too late for PROMs capture.\nIn the new system, patients receiving a surgery booking will need to be reminded that they will receive an additional questionnaire that is more specific to their condition prior to their surgery."
+  },
+  {
+    "objectID": "SHARKSGov.html#satisfaction",
+    "href": "SHARKSGov.html#satisfaction",
+    "title": "SHARKS_Governance",
+    "section": "6.6 Satisfaction",
+    "text": "6.6 Satisfaction\n\n\n\n\nTable 2: Satisfaction likert responses for arthroplasty cohorts\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nGHArthritis\nN = 641\nHipArthroplasty\nN = 3581\nKneeArthritis\nN = 6411\n\n\n\n\nTreatmentSatisfaction_12months\n\n\n\n\n\n\n\n\n    1\n0 (0%)\n2 (25%)\n6 (18%)\n\n\n    2\n0 (0%)\n1 (13%)\n4 (12%)\n\n\n    3\n2 (40%)\n1 (13%)\n8 (24%)\n\n\n    4\n3 (60%)\n4 (50%)\n16 (47%)\n\n\n    Unknown\n59\n350\n607\n\n\n\n1 n (%)\n\n\n\n\n\n\n\n\n\n\n\nThe satisfaction scores were incorporated into SHARKSv2, but have not been available historically as part of the SHARKS configuration in the previous platform."
+  },
+  {
+    "objectID": "SHARKSGov.html#estimated-burden",
+    "href": "SHARKSGov.html#estimated-burden",
+    "title": "SHARKS_Governance",
+    "section": "8.1 Estimated Burden",
+    "text": "8.1 Estimated Burden\n\nThe esimated median time to complete an admin form per appointment is 24 seconds. Per day that translates to 5 minutes per person when the number of appointments is estimated at 50 and the number of staff involved in data collection is 4. It should be noted that about the same amount of time is required to complete fewer (but more detailed) clinic assessment forms for each active registry record. In total, it is estimated that since the introduction of SHARKSv2 that 58.7 hours were required to complete admin forms for all appointments."
   }
 ]
