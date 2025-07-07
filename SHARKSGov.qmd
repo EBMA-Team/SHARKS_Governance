@@ -619,7 +619,7 @@ CurrSTROBE_AF2 <- CurrSTROBE |> dplyr::filter(
 *Do Department staff engage with the registry interface?*
 
 ::: {#fig-traffic}
-![](Website Traffic June 2025.png)
+![](Website%20Traffic%20June%202025.png)
 
 SHARKSRegistry.com traffic Nov 2024 - Jun 2025
 :::
@@ -1586,6 +1586,6 @@ DailyAdmin <- round(((AFMedian*AppointN)/60)/ClinicN,1)
 
 ```{epoxy}
 
-The esimated median time to complete an admin form per appointment is {AFMedian} seconds. Per day that translates to {DailyAdmin} minutes per person when the number of appointments is estimated at {AppointN} and the number of staff involved in data collection is {ClinicN}. It should be noted that about the same amount of time is required to complete fewer (but more detailed) clinic assessment forms for each active registry record. In total, it is estimated that since the introduction of SHARKSv2 that {TotalAdmin} hours were required to complete admin forms for all appointments.
+The estimated median time to complete an admin form per appointment is {AFMedian} seconds. Per day that translates to {DailyAdmin} minutes per person when the number of appointments is estimated at {AppointN} and the number of staff involved in data collection is {ClinicN}. It should be noted that about the same amount of time is required to complete fewer (but more detailed) clinic assessment forms for each active registry record. In total, it is estimated that since the introduction of SHARKSv2 that {TotalAdmin} hours were required to complete admin forms for all appointments.
 
 ```
