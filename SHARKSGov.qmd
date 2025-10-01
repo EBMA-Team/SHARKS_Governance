@@ -7,7 +7,7 @@ type: "website"
 number-sections: true
 number-depth: 3
 date: "2025-Apr-15"
-date-modified: "2025-Jul-04"
+date-modified: "2025-Oct-01"
 
 bibliography: SHARKSGov references.bib
 
@@ -419,7 +419,7 @@ ACAF <- googlesheets4::range_read(
 
 ```
 
-A static registry snapshot was retrieved and formatted based on the fixed date of preparation of the snapshot (30-Jun-2025).
+A static registry snapshot was retrieved and formatted based on the fixed date of preparation of the snapshot (30-Sept-2025).
 
 ```{r}
 
@@ -427,7 +427,7 @@ A static registry snapshot was retrieved and formatted based on the fixed date o
 gs4_auth(token = drive_token())
 
 # To get a snapshot from a specific folder (e.g., "20230415")
-specific_snapshot <- get_specific_snapshot("20250630")
+specific_snapshot <- get_specific_snapshot("20250930")
 
 
 ```
