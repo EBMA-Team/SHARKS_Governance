@@ -5,9 +5,6 @@ website:
   title: "SHARKS_Governance"
   navbar:
     left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
 
 format:
   html:
