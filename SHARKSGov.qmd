@@ -619,7 +619,7 @@ CurrSTROBE_AF2 <- CurrSTROBE |> dplyr::filter(
 *Do Department staff engage with the registry interface?*
 
 ::: {#fig-traffic}
-![](images/clipboard-2199968567.png)
+![](Website Traffic December 2025.png)
 
 Figure 1: SHARKSRegistry.com traffic Jul 2025 - Dec 2025
 :::
