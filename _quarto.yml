@@ -3,8 +3,6 @@ project:
 
 website:
   title: "SHARKS_Governance"
-  navbar:
-    left:
 
 format:
   html:
