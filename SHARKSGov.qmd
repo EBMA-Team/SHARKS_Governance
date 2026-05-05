@@ -7,7 +7,7 @@ type: "website"
 number-sections: true
 number-depth: 3
 date: "2025-Dec-31"
-date-modified: "2026-Jan-27"
+date-modified: "2026-Mar-31"
 
 bibliography: SHARKSGov references.bib
 
@@ -427,7 +427,7 @@ A static registry snapshot was retrieved and formatted based on the fixed date o
 gs4_auth(token = drive_token())
 
 # To get a snapshot from a specific folder (e.g., "20230415")
-specific_snapshot <- get_specific_snapshot("20251231")
+specific_snapshot <- get_specific_snapshot("20260331")
 
 
 ```
@@ -1550,21 +1550,21 @@ The registry database needs backfilling with regards to confirming the surgical 
 
 The following recommendations are presented for improving the data quality of the SHARKS dataset;
 
--   Staff engage with Registry form links presented during daily lists
+- Staff engage with Registry form links presented during daily lists
 
-    -   Ensure that admin forms are completed for all listed appointments in the daily consult list (green table)
+  - Ensure that admin forms are completed for all listed appointments in the daily consult list (green table)
 
-        -   Only fill out new entries (bottom red table) if the patient meets the inclusion criteria for the Registry
+    - Only fill out new entries (bottom red table) if the patient meets the inclusion criteria for the Registry
 
-    -   Ensure that *clinic assessment forms* (CAF) are completed for all active Registry records
+  - Ensure that *clinic assessment forms* (CAF) are completed for all active Registry records
 
-    -   Ensure all theatre forms are completed for listed surgeries meeting the inclusion criteria for Registry
+  - Ensure all theatre forms are completed for listed surgeries meeting the inclusion criteria for Registry
 
--   Implement actions to improve patient awareness and engagement with initial consent process
+- Implement actions to improve patient awareness and engagement with initial consent process
 
--   EBMA staff attend the Department to ensure technical barriers are identified and addressed
+- EBMA staff attend the Department to ensure technical barriers are identified and addressed
 
--   Increase aqssertiveness with respect to followup of existing records (even without upcoming clinic appointment)
+- Increase aqssertiveness with respect to followup of existing records (even without upcoming clinic appointment)
 
 ## Estimated Burden
 
