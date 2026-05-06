@@ -1354,21 +1354,84 @@ knitr::knit_print(FigureOKS)
 
 ```
 
+
+```{r}
+#| label: ka-intraop-prep
+
+
+
+SnapshotKASurg <- Snapshot |> dplyr::filter(
+    RegistryCohortName == "KneeArthritis",
+    !is.na(ProcedureName)
+  ) |> dplyr::select(
+    ProcedureName,
+    PatellarResurfacing,
+    Anaesthetic,
+    Approach,
+    TourniquetUse,
+    SoftTissueReleaseMedial,
+    SoftTissueReleaseLateral,
+    SoftTissueReleaseAnterior,
+    SoftTissueReleasePosteriorCapsule,
+    AdjunctProcedures,
+    AlignmentReference
+  ) |> mutate(
+    ProcedureGroup = case_when(
+      # Primary Bilateral
+      stringr::str_detect(str_to_lower(ProcedureName), "kap2")                          ~ "Total Primary Bilateral",
+      stringr::str_detect(str_to_lower(ProcedureName), "kap2.2")                          ~ "Total Primary Subsequent Bilateral",
+      str_detect(str_to_lower(ProcedureName), "bilateral")                     ~ "Total Primary Bilateral",
+
+      # Primary Unilateral
+      str_detect(ProcedureName, "KAP1")                          ~ "Total Primary Unilateral",
+
+      # Patellofemoral
+      str_detect(ProcedureName, "PATELLOFEMORAL")                ~ "Unicompartmental Patellofemoral",
+      
+      # Unicompartmental
+      str_detect(str_to_lower(ProcedureName), "unicompartmental") & str_detect(str_to_lower(ProcedureName), "kar1|revision", negate = TRUE)         ~ "Unicompartmental",
+
+      # Best-guess primary — ambiguous loose names
+      ProcedureName %in% c(
+        "TKR",
+        "TOTAL KNEE ARTHROPLASTY",
+        "TOTAL KNEE ARTHROPLASY",        # typo variant in your data
+        "KNEE ARTHROPLASTY",
+        "COMPLEX PRIMARY TOTAL KNEE",
+        "COMPLEX PRIMARY TOTAL KNEE REPLACEMENT - VALGUS",
+        "COMPLEX TOTAL KNEE REPLACEMENT",
+        "COMPLEX TOTAL KNEE REPLACEMENT + REMOVAL OF METAL",
+        "ATTUNE TOTAL KNEE REPLACEMENT",
+        "1ST STAGE REVISION TOTAL KNEE REPLACEMENT",
+        "SECOND STAGE REVISION TOTAL KNEE REPLACEMENT"
+      )                                                           ~ "Total Primary Unilateral",
+
+      # Staged revisions — best guess revision
+      ProcedureName %in% c(
+        "1ST REVISION TOTAL KNEE REPLACEMENT",
+        "REVISION KNEE REPLACEMENT",
+        "REVISION OF TOTAL KNEE ARTHROPLASTY"
+      ) | str_detect(str_to_lower(ProcedureName), "kar1") & str_detect(str_to_lower(ProcedureName), "unicompartmental", negate = TRUE)                                                           ~ "Total Revision Unilateral",
+
+      .default = NA_character_
+    )
+  ) |> relocate(
+    ProcedureGroup
+  )
+
+```
+
+
 ```{r}
 #| label: tbl-ka-intraop
 #| tbl-cap: "Summary of intraoperative variables in Knee Arthritis cohort"
 
 TableKAsurg <- gtsummary::tbl_summary(
-  Snapshot |> dplyr::filter(
-    RegistryCohortName == "KneeArthritis"
-  ) |> dplyr::select(
-    TourniquetUse:AlignmentReference
-  ) |> dplyr::select(
-    -(contains("Graft")),
-    -(contains("Duration"))
-  ),
+  SnapshotKASurg |> dplyr::select(
+  -ProcedureName
+),
   missing = "no"
-)
+) 
 
 knitr::knit_print(TableKAsurg)
 
