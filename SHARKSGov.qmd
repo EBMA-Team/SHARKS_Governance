@@ -619,7 +619,7 @@ CurrSTROBE_AF2 <- CurrSTROBE |> dplyr::filter(
 *Do Department staff engage with the registry interface?*
 
 ::: {#fig-traffic}
-![Figure 1: SHARKSRegistry.com traffic Jul 2025 - Dec 2025](Website%20Traffic%20December%202025.png)
+![Figure 1: SHARKSRegistry.com traffic Jul 2025 - Dec 2025](Website%20Traffic%20Mar%202026.png)
 :::
 
 *Do Department staff engage with records of new patients flagged on consult lists?*
@@ -1354,7 +1354,6 @@ knitr::knit_print(FigureOKS)
 
 ```
 
-
 ```{r}
 #| label: ka-intraop-prep
 
@@ -1420,7 +1419,6 @@ SnapshotKASurg <- Snapshot |> dplyr::filter(
   )
 
 ```
-
 
 ```{r}
 #| label: tbl-ka-intraop
