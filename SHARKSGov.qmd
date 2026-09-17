@@ -7,7 +7,7 @@ type: "website"
 number-sections: true
 number-depth: 3
 date: "2025-Dec-31"
-date-modified: "2026-Mar-31"
+date-modified: "2026-Sep-17"
 
 bibliography: SHARKSGov references.bib
 
@@ -427,7 +427,7 @@ A static registry snapshot was retrieved and formatted based on the fixed date o
 gs4_auth(token = drive_token())
 
 # To get a snapshot from a specific folder (e.g., "20230415")
-specific_snapshot <- get_specific_snapshot("20260331")
+specific_snapshot <- get_specific_snapshot("20260917")
 
 
 ```
@@ -716,7 +716,7 @@ STROBEFlow2 <- STROBEInput |>
 
 ```{r}
 
-CurrentDate <- as.character("20250331")
+CurrentDate <- as.character("20260917")
 
 STROBEFlow3 <- STROBEFlow2 |> dplyr::mutate(
   Joint = case_when(
@@ -873,7 +873,7 @@ RecordCount <- dplyr::summarise(
   CumulativeCount = cumsum(Count),
   PatientCreationNum = as.numeric(PatientCreationDate)
   ) |> filter(
-    !(PatientCreationDate < ymd("20160701"))
+    !(PatientCreationDate < ymd("20170701"))
   )
 
 cumulative_plot <- ggplot(RecordCount, aes(x = PatientCreationDate, y = CumulativeCount)) +
